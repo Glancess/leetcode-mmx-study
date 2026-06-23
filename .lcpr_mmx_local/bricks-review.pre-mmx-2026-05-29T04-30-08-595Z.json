@@ -1,0 +1,89 @@
+{
+  "version": 2,
+  "cards": {
+    "78": {
+      "due": 1780537103932,
+      "createdAt": 1779930989253,
+      "interval": 6,
+      "repetition": 2,
+      "efactor": 2.7,
+      "lastReview": 1780018703932,
+      "state": "review"
+    },
+    "90": {
+      "due": 1780537161649,
+      "createdAt": 1779931283138,
+      "interval": 6,
+      "repetition": 2,
+      "efactor": 2.7,
+      "lastReview": 1780018761649,
+      "state": "review"
+    },
+    "106": {
+      "due": 1780108841809,
+      "createdAt": 1780022441809,
+      "interval": 1,
+      "repetition": 1,
+      "efactor": 2.36,
+      "lastReview": 1780022441809,
+      "state": "learning"
+    },
+    "110": {
+      "due": 1780537335715,
+      "createdAt": 1779931655319,
+      "interval": 6,
+      "repetition": 2,
+      "efactor": 2.46,
+      "lastReview": 1780018935715,
+      "state": "review"
+    },
+    "112": {
+      "due": 1780107078159,
+      "createdAt": 1780020678159,
+      "interval": 1,
+      "repetition": 1,
+      "efactor": 2.36,
+      "lastReview": 1780020678159,
+      "state": "learning"
+    },
+    "257": {
+      "due": 1780537622353,
+      "createdAt": 1779933649086,
+      "interval": 6,
+      "repetition": 2,
+      "efactor": 2.7,
+      "lastReview": 1780019222353,
+      "state": "review"
+    },
+    "404": {
+      "due": 1780538041013,
+      "createdAt": 1779934424458,
+      "interval": 6,
+      "repetition": 2,
+      "efactor": 2.2199999999999998,
+      "lastReview": 1780019641013,
+      "state": "review"
+    },
+    "513": {
+      "due": 1780538336173,
+      "createdAt": 1779936517014,
+      "interval": 6,
+      "repetition": 2,
+      "efactor": 2.7,
+      "lastReview": 1780019936173,
+      "state": "review"
+    }
+  },
+  "migratedFromLegacy": false,
+  "dailyPlan": {
+    "date": "2026-05-29",
+    "qids": [
+      "78",
+      "90",
+      "110",
+      "257",
+      "404",
+      "513"
+    ]
+  }
+}
