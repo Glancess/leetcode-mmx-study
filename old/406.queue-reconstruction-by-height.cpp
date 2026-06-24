@@ -34,13 +34,12 @@ public:
             if(i[0]!=j[0]){
                 return i[0]>j[0];
             }else{
-
                 return i[1]<j[1];
             } });
         vector<vector<int>> resu;
-        for (int i = 0; i < people.size(); i++)
+        for (auto &i : people)
         {
-            resu.insert(resu.begin() + people[i][1], people[i]);
+            resu.insert(resu.begin() + i[1], i);
         }
         return resu;
     }

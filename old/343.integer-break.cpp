@@ -35,8 +35,7 @@ public:
         {
             for (int j = 1; j <= i / 2; j++)
             {
-                dp[i] = max(dp[i],
-                            max(j * (i - j), j * dp[i - j]));
+                dp[i] = max(dp[i], max(j * (i - j), j * dp[i - j]));
             }
         }
         return dp[n];

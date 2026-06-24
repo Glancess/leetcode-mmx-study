@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=501 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30218
  *
  * [501] 二叉搜索树中的众数
  */
@@ -38,18 +38,18 @@ using namespace std;
 class Solution
 {
 public:
+    int count = 0;
+    int maxcount = 0;
     vector<int> resu;
     TreeNode *pre = nullptr;
-    int maxcount = 0;
-    int count = 0;
-    void getmany(TreeNode *root)
+    void getmax(TreeNode *root)
     {
         if (!root)
         {
             return;
         }
-        getmany(root->left);
-        if (pre && pre->val == root->val)
+        getmax(root->left);
+        if (pre && root->val == pre->val)
         {
             count++;
         }
@@ -57,22 +57,22 @@ public:
         {
             count = 1;
         }
-        pre = root;
         if (count > maxcount)
         {
+            maxcount = count;
             resu.clear();
             resu.push_back(root->val);
-            maxcount = count;
         }
         else if (count == maxcount)
         {
             resu.push_back(root->val);
         }
-        getmany(root->right);
+        pre = root;
+        getmax(root->right);
     }
     vector<int> findMode(TreeNode *root)
     {
-        getmany(root);
+        getmax(root);
         return resu;
     }
 };

@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=134 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30218
  *
  * [134] 加油站
  */
@@ -29,21 +29,20 @@ class Solution
 public:
     int canCompleteCircuit(vector<int> &gas, vector<int> &cost)
     {
-        int tank = 0;
-        int totaltank = 0;
+        int cursum = 0;
+        int totalsum = 0;
         int start = 0;
-        for (int i = 0; i < cost.size(); i++)
+        for (int i = 0; i < gas.size(); i++)
         {
-            int diff = gas[i] - cost[i];
-            tank += diff;
-            totaltank += diff;
-            if (tank < 0)
+            cursum += gas[i] - cost[i];
+            totalsum += gas[i] - cost[i];
+            if (cursum < 0)
             {
                 start = i + 1;
-                tank = 0;
+                cursum = 0;
             }
         }
-        return totaltank >= 0 ? start : -1;
+        return totalsum >= 0 ? start : -1;
     }
 };
 // @lc code=end

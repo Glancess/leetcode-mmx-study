@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=404 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30218
  *
  * [404] 左叶子之和
  */
@@ -38,19 +38,26 @@ using namespace std;
 class Solution
 {
 public:
-    int sumOfLeftLeaves(TreeNode *root)
+    int sum = 0;
+    void get(TreeNode *root)
     {
         if (!root)
         {
-            return 0;
+            return;
         }
-        int sum = 0;
-        if (root->left && !root->left->left && !root->left->right)
+        if (root->left)
         {
-            sum += root->left->val;
+            if (!root->left->left && !root->left->right)
+            {
+                sum += root->left->val;
+                        }
         }
-        sum += sumOfLeftLeaves(root->left);
-        sum += sumOfLeftLeaves(root->right);
+        get(root->left);
+        get(root->right);
+    }
+    int sumOfLeftLeaves(TreeNode *root)
+    {
+        get(root);
         return sum;
     }
 };

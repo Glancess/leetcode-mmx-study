@@ -29,21 +29,21 @@ class Solution
 public:
     int maxSubArray(vector<int> &nums)
     {
-        int cursum = nums[0];
-        int sum = nums[0];
+        int cur = nums[0];
+        int maxx = nums[0];
         for (int i = 1; i < nums.size(); i++)
         {
-            if (cursum < 0)
+            if (cur < 0)
             {
-                cursum = nums[i];
+                cur = nums[i];
             }
             else
             {
-                cursum += nums[i];
+                cur += nums[i];
             }
-            sum = max(sum, cursum);
+            maxx = max(cur, maxx);
         }
-        return sum;
+        return maxx;
     }
 };
 // @lc code=end
