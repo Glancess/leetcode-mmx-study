@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=494 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [494] 目标和
  */
@@ -29,22 +29,21 @@ class Solution
 public:
     int findTargetSumWays(vector<int> &nums, int target)
     {
+        // A-B=tar A+B=sum 2A=tar+sum;A=tar+sum  /2;
         int sum = 0;
         for (int &i : nums)
         {
             sum += i;
         }
-        if ((sum + target) % 2 != 0)
+        if ((sum + target) % 2)
         {
             return 0;
         }
-        if (sum + target < 0)
-        {
-            return 0;
-        }
-
         int total = (sum + target) / 2;
-
+        if (total < 0)
+        {
+            return 0;
+        }
         vector<vector<int>> dp(nums.size(), vector<int>(total + 1, 0));
         if (nums[0] == 0)
         {
@@ -53,31 +52,20 @@ public:
         else
         {
             dp[0][0] = 1;
-            if (nums[0] < total + 1)
+
+            if (nums[0] <= total)
             {
                 dp[0][nums[0]] = 1;
             }
         }
-        // for (int i = 1; i < total + 1; i++)
-        // {
-
-        //     if (nums[0] == i)
-        //     {
-        //         dp[0][i] = 1;
-        //     }
-        // }
         for (int i = 1; i < nums.size(); i++)
         {
             for (int j = 0; j < total + 1; j++)
             {
                 if (j >= nums[i])
-                {
                     dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i]];
-                }
                 else
-                {
                     dp[i][j] = dp[i - 1][j];
-                }
             }
         }
         return dp[nums.size() - 1][total];

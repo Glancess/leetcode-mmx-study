@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=110 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30219
  *
  * [110] 平衡二叉树
  */
@@ -38,18 +38,19 @@ using namespace std;
 class Solution
 {
 public:
-    int isbal(TreeNode *root)
+    int isbanlanced(TreeNode *root)
     {
         if (!root)
         {
             return 0;
         }
-        int left = isbal(root->left);
+
+        int left = isbanlanced(root->left);
         if (left == -1)
         {
             return -1;
         }
-        int right = isbal(root->right);
+        int right = isbanlanced(root->right);
         if (right == -1)
         {
             return -1;
@@ -65,7 +66,7 @@ public:
     }
     bool isBalanced(TreeNode *root)
     {
-        return isbal(root) != -1;
+        return isbanlanced(root) == -1 ? false : true;
     }
 };
 // @lc code=end

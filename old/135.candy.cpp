@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=135 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [135] 分发糖果
  */

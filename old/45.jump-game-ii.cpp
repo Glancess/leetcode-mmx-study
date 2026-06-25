@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=45 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [45] 跳跃游戏 II
  */
@@ -29,22 +29,22 @@ class Solution
 public:
     int jump(vector<int> &nums)
     {
+        int cur = 0;
+        int sum = 0;
+        int far = 0;
         if (nums.size() == 1)
         {
             return 0;
         }
-        int curend = 0;
-        int far = 0;
-        int sum = 0;
         for (int i = 0; i <= far; i++)
         {
             far = max(far, nums[i] + i);
-            if (curend == i)
+            if (i == cur)
             {
+                cur = far;
                 sum++;
-                curend = far;
             }
-            if (curend >= nums.size() - 1)
+            if (cur >= nums.size() - 1)
             {
                 return sum;
             }

@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=654 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30219
  *
  * [654] 最大二叉树
  */
@@ -38,21 +38,21 @@ using namespace std;
 class Solution
 {
 public:
-    int getindex(vector<int> &nums, int left, int right)
+    int getmax(int left, int right, vector<int> &nums)
     {
         int index = -1;
-        int maxx = -1;
+        int maxx = -1e9;
         for (int i = left; i <= right; i++)
         {
-            if (nums[i] > maxx)
+            if (maxx < nums[i])
             {
-                index = i;
                 maxx = nums[i];
+                index = i;
             }
         }
         return index;
     }
-    TreeNode *build(vector<int> &nums, int left, int right)
+    TreeNode *get(int left, int right, vector<int> &nums)
     {
         if (left == right)
         {
@@ -62,15 +62,15 @@ public:
         {
             return nullptr;
         }
-        int index = getindex(nums, left, right);
-        TreeNode *root = new TreeNode(nums[index]);
-        root->left = build(nums, left, index - 1);
-        root->right = build(nums, index + 1, right);
+        int ind = getmax(left, right, nums);
+        TreeNode *root = new TreeNode(nums[ind]);
+        root->left = get(left, ind - 1, nums);
+        root->right = get(ind + 1, right, nums);
         return root;
     }
     TreeNode *constructMaximumBinaryTree(vector<int> &nums)
     {
-        return build(nums, 0, nums.size() - 1);
+        return get(0, nums.size() - 1, nums);
     }
 };
 // @lc code=end

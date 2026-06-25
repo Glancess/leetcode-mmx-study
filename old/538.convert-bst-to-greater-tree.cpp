@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=538 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30219
  *
  * [538] 把二叉搜索树转换为累加树
  */
@@ -39,21 +39,21 @@ class Solution
 {
 public:
     int sum = 0;
-    void build(TreeNode *root)
+    void get(TreeNode *root)
     {
         if (!root)
         {
             return;
         }
-        build(root->right);
+        get(root->right);
         int t = root->val;
         root->val += sum;
         sum += t;
-        build(root->left);
+        get(root->left);
     }
     TreeNode *convertBST(TreeNode *root)
     {
-        build(root);
+        get(root);
         return root;
     }
 };

@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=1049 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [1049] 最后一块石头的重量 II
  */
@@ -29,6 +29,8 @@ class Solution
 public:
     int lastStoneWeightII(vector<int> &stones)
     {
+        // 本来 选两块石头，碰撞，然后a-b的绝对值。剩余的作为新石头，继续碰撞。
+        //  a1-b1 a2-b2 a3-b3 继续 a1-b1-a2+b2-a3+b3，总有些石头前面是+，有些是-
         int sum = 0;
         for (int &i : stones)
         {
@@ -42,13 +44,9 @@ public:
         }
         for (int i = 0; i < total + 1; i++)
         {
-            if (stones[0] <= i)
+            if (i >= stones[0])
             {
                 dp[0][i] = stones[0];
-            }
-            else
-            {
-                dp[0][i] = 0;
             }
         }
         for (int i = 1; i < stones.size(); i++)

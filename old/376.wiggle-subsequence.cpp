@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=376 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [376] 摆动序列
  */
@@ -29,25 +29,20 @@ class Solution
 public:
     int wiggleMaxLength(vector<int> &nums)
     {
-        if (nums.size() < 2)
-            return nums.size();
 
-        int res = 1;
-        int prevDiff = 0;
-
-        for (int i = 1; i < nums.size(); i++)
+        int preDiff = 0;
+        int ans = 1;
+        for (int i = 0; i < nums.size() - 1; i++)
         {
-            int diff = nums[i] - nums[i - 1];
-
-            if ((diff > 0 && prevDiff <= 0) ||
-                (diff < 0 && prevDiff >= 0))
+            int curDiff = nums[i + 1] - nums[i];
+            if ((preDiff <= 0 && curDiff > 0) ||
+                (preDiff >= 0 && curDiff < 0))
             {
-                res++;
-                prevDiff = diff;
+                ans++;
+                preDiff = curDiff;
             }
         }
-
-        return res;
+        return ans;
     }
 };
 // @lc code=end

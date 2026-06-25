@@ -3,17 +3,17 @@
   "cards": {
     "45": {
       "algorithm": "mmx",
-      "due": 1782095031039,
+      "due": 1783738629211,
       "createdAt": 1780726703809,
-      "interval": 7,
-      "repetition": 5,
-      "lastReview": 1781490231039,
+      "interval": 16,
+      "repetition": 6,
+      "lastReview": 1782356229211,
       "state": "review",
       "difficulty": 8,
-      "halflife": 25.662293821434815,
+      "halflife": 88.25815309030936,
       "lapses": 1,
-      "lastRecall": 0.8426372190522606,
-      "lastRating": 1
+      "lastRecall": 0.7628239345362928,
+      "lastRating": 2
     },
     "53": {
       "algorithm": "mmx",
@@ -185,16 +185,16 @@
     },
     "110": {
       "algorithm": "mmx",
-      "due": 1782349488273,
+      "due": 1785289571669,
       "createdAt": 1779931655319,
-      "interval": 15,
-      "repetition": 4,
-      "lastReview": 1781053488273,
+      "interval": 34,
+      "repetition": 5,
+      "lastReview": 1782351971669,
       "state": "review",
       "difficulty": 7,
-      "halflife": 76.1462629301748,
+      "halflife": 171.55505086090545,
       "lapses": 0,
-      "lastRecall": 0.8847365848132502,
+      "lastRecall": 0.8721409487208932,
       "lastRating": 2
     },
     "112": {
@@ -241,16 +241,16 @@
     },
     "135": {
       "algorithm": "mmx",
-      "due": 1782094816898,
+      "due": 1783130161483,
       "createdAt": 1780889249402,
-      "interval": 3,
-      "repetition": 5,
-      "lastReview": 1781835616898,
+      "interval": 9,
+      "repetition": 6,
+      "lastReview": 1782352561483,
       "state": "review",
       "difficulty": 10,
-      "halflife": 11.788515812501949,
+      "halflife": 46.78487607214663,
       "lapses": 1,
-      "lastRecall": 0.8507634983047575,
+      "lastRecall": 0.7034203684039754,
       "lastRating": 2
     },
     "235": {
@@ -311,17 +311,17 @@
     },
     "376": {
       "algorithm": "mmx",
-      "due": 1782182066645,
+      "due": 1782443550090,
       "createdAt": 1780545170479,
-      "interval": 8,
-      "repetition": 4,
-      "lastReview": 1781490866645,
-      "state": "review",
-      "difficulty": 8,
-      "halflife": 44.98327981965,
-      "lapses": 1,
-      "lastRecall": 0.821769952338664,
-      "lastRating": 1
+      "interval": 1,
+      "repetition": 5,
+      "lastReview": 1782357150090,
+      "state": "relearning",
+      "difficulty": 10,
+      "halflife": 5.754399915567153,
+      "lapses": 2,
+      "lastRecall": 0.8568458903887766,
+      "lastRating": 0
     },
     "404": {
       "algorithm": "mmx",
@@ -353,16 +353,16 @@
     },
     "416": {
       "algorithm": "mmx",
-      "due": 1782267910599,
+      "due": 1782613462861,
       "createdAt": 1781842285138,
-      "interval": 2,
-      "repetition": 2,
-      "lastReview": 1782095110599,
+      "interval": 3,
+      "repetition": 3,
+      "lastReview": 1782354262861,
       "state": "review",
       "difficulty": 8,
-      "halflife": 9.096436395060241,
+      "halflife": 16.762545509219887,
       "lapses": 1,
-      "lastRecall": 0.44813747448263874,
+      "lastRecall": 0.7956805617124705,
       "lastRating": 1
     },
     "435": {
@@ -421,19 +421,33 @@
       "lastRecall": 0.787553895469802,
       "lastRating": 2
     },
-    "494": {
+    "474": {
       "algorithm": "mmx",
-      "due": 1782187524785,
-      "createdAt": 1782101124785,
+      "due": 1782360229315,
+      "createdAt": 1782273829315,
       "interval": 1,
       "repetition": 1,
-      "lastReview": 1782101124785,
+      "lastReview": 1782273829315,
       "state": "learning",
-      "difficulty": 8,
-      "halflife": 2.5269897829959347,
-      "lapses": 1,
+      "difficulty": 6,
+      "halflife": 1.6607679869362881,
+      "lapses": 0,
       "lastRecall": 0.9806070262331367,
-      "lastRating": 0
+      "lastRating": 1
+    },
+    "494": {
+      "algorithm": "mmx",
+      "due": 1782527951654,
+      "createdAt": 1782101124785,
+      "interval": 2,
+      "repetition": 2,
+      "lastReview": 1782355151654,
+      "state": "review",
+      "difficulty": 8,
+      "halflife": 9.116134821899243,
+      "lapses": 1,
+      "lastRecall": 0.4464314626319485,
+      "lastRating": 1
     },
     "501": {
       "algorithm": "mmx",
@@ -479,16 +493,16 @@
     },
     "538": {
       "algorithm": "mmx",
-      "due": 1782348834969,
+      "due": 1784858308697,
       "createdAt": 1780368222989,
-      "interval": 15,
-      "repetition": 4,
-      "lastReview": 1781052834969,
+      "interval": 29,
+      "repetition": 5,
+      "lastReview": 1782352708697,
       "state": "review",
       "difficulty": 6,
-      "halflife": 68.22225568133628,
+      "halflife": 172.2425584328326,
       "lapses": 0,
-      "lastRecall": 0.8874440782287788,
+      "lastRecall": 0.8582519965727887,
       "lastRating": 2
     },
     "617": {
@@ -507,16 +521,16 @@
     },
     "654": {
       "algorithm": "mmx",
-      "due": 1782117147362,
+      "due": 1784601945431,
       "createdAt": 1780113055143,
-      "interval": 15,
-      "repetition": 4,
-      "lastReview": 1780821147362,
+      "interval": 26,
+      "repetition": 5,
+      "lastReview": 1782355545431,
       "state": "review",
       "difficulty": 6,
-      "halflife": 70.1989436686359,
+      "halflife": 190.75288258281492,
       "lapses": 0,
-      "lastRecall": 0.8796298540825053,
+      "lastRecall": 0.8391587170506739,
       "lastRating": 2
     },
     "669": {
@@ -563,17 +577,17 @@
     },
     "768": {
       "algorithm": "mmx",
-      "due": 1782265805568,
+      "due": 1783652892584,
       "createdAt": 1781059335702,
-      "interval": 9,
-      "repetition": 3,
-      "lastReview": 1781488205568,
+      "interval": 15,
+      "repetition": 4,
+      "lastReview": 1782356892584,
       "state": "review",
       "difficulty": 8,
-      "halflife": 38.841667593095075,
+      "halflife": 60.86943560925903,
       "lapses": 1,
-      "lastRecall": 0.7838218459059252,
-      "lastRating": 2
+      "lastRecall": 0.8357526232977391,
+      "lastRating": 1
     },
     "783": {
       "algorithm": "mmx",
@@ -661,33 +675,33 @@
     },
     "1130": {
       "algorithm": "mmx",
-      "due": 1782270460965,
+      "due": 1782958557349,
       "createdAt": 1781844902812,
-      "interval": 2,
-      "repetition": 2,
-      "lastReview": 1782097660965,
+      "interval": 7,
+      "repetition": 3,
+      "lastReview": 1782353757349,
       "state": "review",
       "difficulty": 8,
-      "halflife": 9.095330526958211,
+      "halflife": 30.775151731308053,
       "lapses": 1,
-      "lastRecall": 0.448233245165268,
-      "lastRating": 1
+      "lastRecall": 0.7978059909750647,
+      "lastRating": 2
     }
   },
   "migratedFromLegacy": true,
   "dailyPlan": {
-    "date": "2026-06-24",
+    "date": "2026-06-25",
     "qids": [
-      "134",
-      "404",
-      "53",
-      "1013",
-      "70",
-      "501",
-      "343",
-      "784",
-      "452",
-      "406"
+      "135",
+      "45",
+      "654",
+      "376",
+      "494",
+      "768",
+      "416",
+      "1130",
+      "538",
+      "110"
     ]
   }
 }
