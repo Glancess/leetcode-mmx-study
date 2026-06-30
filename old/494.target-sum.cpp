@@ -29,46 +29,38 @@ class Solution
 public:
     int findTargetSumWays(vector<int> &nums, int target)
     {
-        // A-B=tar A+B=sum 2A=tar+sum;A=tar+sum  /2;
         int sum = 0;
         for (int &i : nums)
         {
             sum += i;
         }
-        if ((sum + target) % 2)
+        if ((sum + target) % 2 != 0)
+            return 0;
+        if (abs(target) > sum)
         {
             return 0;
         }
-        int total = (sum + target) / 2;
-        if (total < 0)
         {
-            return 0;
         }
-        vector<vector<int>> dp(nums.size(), vector<int>(total + 1, 0));
-        if (nums[0] == 0)
+        int total = (target + sum) / 2;
+        vector<int> dp(total + 1, 0);
+        dp[0] = 1;
+        for (int num : nums)
         {
-            dp[0][0] = 2;
-        }
-        else
-        {
-            dp[0][0] = 1;
-
-            if (nums[0] <= total)
+            if (num == 0)
             {
-                dp[0][nums[0]] = 1;
+                // 所有方案翻倍
+                for (int j = 0; j <= total; j++)
+                    dp[j] *= 2;
+            }
+            else
+            {
+                // 0-1 背包
+                for (int j = total; j >= num; j--)
+                    dp[j] += dp[j - num];
             }
         }
-        for (int i = 1; i < nums.size(); i++)
-        {
-            for (int j = 0; j < total + 1; j++)
-            {
-                if (j >= nums[i])
-                    dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i]];
-                else
-                    dp[i][j] = dp[i - 1][j];
-            }
-        }
-        return dp[nums.size() - 1][total];
+        return dp[total];
     }
 };
 // @lc code=end

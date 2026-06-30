@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=112 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30219
  *
  * [112] 路径总和
  */
@@ -40,14 +40,13 @@ class Solution
 public:
     bool hasPathSum(TreeNode *root, int targetSum)
     {
-
         if (!root)
         {
             return false;
         }
         if (!root->left && !root->right)
         {
-            if (!(targetSum - root->val))
+            if (targetSum - root->val == 0)
             {
                 return true;
             }
@@ -56,7 +55,9 @@ public:
                 return false;
             }
         }
-        return hasPathSum(root->left, targetSum - root->val) || hasPathSum(root->right, targetSum - root->val);
+        bool left = hasPathSum(root->left, targetSum - root->val);
+        bool right = hasPathSum(root->right, targetSum - root->val);
+        return left || right;
     }
 };
 // @lc code=end

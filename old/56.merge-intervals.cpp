@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=56 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [56] 合并区间
  */
@@ -29,21 +29,23 @@ class Solution
 public:
     vector<vector<int>> merge(vector<vector<int>> &intervals)
     {
-        vector<vector<int>> resu;
-        sort(intervals.begin(), intervals.end(), [](vector<int> &a, vector<int> &b)
+
+        sort(intervals.begin(), intervals.end(), [](auto &a, auto &b)
              {
             if(a[0]!=b[0]){
+                
                 return a[0]<b[0];
             }else{
+
                 return a[1]<b[1];
             } });
-
+        vector<vector<int>>
+            resu;
         vector<int> same = intervals[0];
         for (int i = 1; i < intervals.size(); i++)
         {
             if (intervals[i][0] <= same[1])
             {
-
                 same[1] = max(same[1], intervals[i][1]);
             }
             else

@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=106 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30219
  *
  * [106] 从中序与后序遍历序列构造二叉树
  */
@@ -38,7 +38,7 @@ using namespace std;
 class Solution
 {
 public:
-    int findd(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
+    int findIndex(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
     {
         for (int i = il; i <= ir; i++)
         {
@@ -49,25 +49,22 @@ public:
         }
         return -1;
     }
-    TreeNode *build(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
+    TreeNode *gett(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
     {
-        if (ir == il)
-        {
-            return new TreeNode(inorder[ir]);
-        }
         if (il > ir)
         {
             return nullptr;
         }
-        int index = findd(inorder, il, ir, postorder, pl, pr);
+        int index = findIndex(inorder, il, ir, postorder, pl, pr);
         TreeNode *root = new TreeNode(inorder[index]);
-        root->left = build(inorder, il, index - 1, postorder, pl, pl + index - il - 1);
-        root->right = build(inorder, index + 1, ir, postorder, pl + index - il, pr - 1);
+        int size = index - il;
+        root->left = gett(inorder, il, index - 1, postorder, pl, pl + size - 1);
+        root->right = gett(inorder, index + 1, ir, postorder, pl + size, pr - 1);
         return root;
     }
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
     {
-        return build(inorder, 0, inorder.size() - 1, postorder, 0, postorder.size() - 1);
+        return gett(inorder, 0, inorder.size() - 1, postorder, 0, postorder.size() - 1);
     }
 };
 // @lc code=end

@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=669 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30219
  *
  * [669] 修剪二叉搜索树
  */
@@ -44,6 +44,7 @@ public:
         {
             return nullptr;
         }
+
         if (root->val < low)
         {
             return trimBST(root->right, low, high);

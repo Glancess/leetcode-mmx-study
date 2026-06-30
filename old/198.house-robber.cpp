@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=96 lang=cpp
+ * @lc app=leetcode.cn id=198 lang=cpp
  * @lcpr version=30219
  *
- * [96] 不同的二叉搜索树
+ * [198] 打家劫舍
  */
 
 // @lcpr-template-start
@@ -27,35 +27,31 @@ using namespace std;
 class Solution
 {
 public:
-    int numTrees(int n)
+    int rob(vector<int> &nums)
     {
-        if (n == 1)
+        vector<int> dp(nums.size(), 0);
+        if (nums.size() == 1)
         {
-            return 1;
+            return nums[0];
         }
-        vector<int> dp(n + 1, 0);
-        dp[0] = 1;
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i < n + 1; i++)
+        dp[0] = nums[0];
+        dp[1] = max(nums[1], nums[0]);
+        for (int j = 2; j < nums.size(); j++)
         {
-            for (int j = 0; j < i; j++)
-            {
-                dp[i] += dp[j] * dp[i - j - 1];
-            }
+            dp[j] = max(dp[j - 1], dp[j - 2] + nums[j]);
         }
-        return dp[n];
+        return dp[nums.size() - 1];
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// 3\n
+// [1,2,3,1]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// 1\n
+// [2,7,9,3,1]\n
 // @lcpr case=end
 
  */

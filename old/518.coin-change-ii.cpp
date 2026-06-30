@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=1005 lang=cpp
+ * @lc app=leetcode.cn id=518 lang=cpp
  * @lcpr version=30219
  *
- * [1005] K 次取反后最大化的数组和
+ * [518] 零钱兑换 II
  */
 
 // @lcpr-template-start
@@ -27,44 +27,34 @@ using namespace std;
 class Solution
 {
 public:
-    int largestSumAfterKNegations(vector<int> &nums, int k)
+    int change(int amount, vector<int> &coins)
     {
-        sort(nums.begin(), nums.end(), [](int &a, int &b)
-             { return abs(a) > abs(b); });
-
-        for (int &i : nums)
+        vector<unsigned long long> dp(amount + 1, 0);
+        dp[0] = 1;
+        for (int &i : coins)
         {
-            if (i <= 0 && k > 0)
+            for (int j = 1; j < amount + 1; j++)
             {
-                k--;
-                i = -i;
+                if (j >= i)
+                    dp[j] += dp[j - i];
             }
         }
-        if (k % 2 == 1)
-        {
-            nums.back() = -nums.back();
-        }
-        int sum = 0;
-        for (int &i : nums)
-        {
-            sum += i;
-        }
-        return sum;
+        return dp[amount];
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// [4,2,3]\n1\n
+// 5\n[1, 2, 5]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// [3,-1,0,2]\n3\n
+// 3\n[2]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// [2,-3,-1,5,-4]\n2\n
+// 10\n[10]\n
 // @lcpr case=end
 
  */

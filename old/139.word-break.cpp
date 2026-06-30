@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=1005 lang=cpp
+ * @lc app=leetcode.cn id=139 lang=cpp
  * @lcpr version=30219
  *
- * [1005] K 次取反后最大化的数组和
+ * [139] 单词拆分
  */
 
 // @lcpr-template-start
@@ -27,44 +27,36 @@ using namespace std;
 class Solution
 {
 public:
-    int largestSumAfterKNegations(vector<int> &nums, int k)
+    bool wordBreak(string s, vector<string> &wordDict)
     {
-        sort(nums.begin(), nums.end(), [](int &a, int &b)
-             { return abs(a) > abs(b); });
-
-        for (int &i : nums)
+        vector<bool> dp(s.size() + 1, false);
+        dp[0] = true;
+        for (int j = 1; j < s.size() + 1; j++)
         {
-            if (i <= 0 && k > 0)
+            for (auto &i : wordDict)
             {
-                k--;
-                i = -i;
+                if (i.size() <= j && dp[j - i.size()] && s.substr(j - i.size(), i.size()) == i)
+                {
+                    dp[j] = true;
+                }
             }
         }
-        if (k % 2 == 1)
-        {
-            nums.back() = -nums.back();
-        }
-        int sum = 0;
-        for (int &i : nums)
-        {
-            sum += i;
-        }
-        return sum;
+        return dp[s.size()];
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// [4,2,3]\n1\n
+// "leetcode"\n["leet", "code"]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// [3,-1,0,2]\n3\n
+// "applepenapple"\n["apple", "pen"]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// [2,-3,-1,5,-4]\n2\n
+// "catsandog"\n["cats", "dog", "sand", "and", "cat"]\n
 // @lcpr case=end
 
  */

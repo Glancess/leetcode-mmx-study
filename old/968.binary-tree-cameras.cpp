@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=968 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [968] 监控二叉树
  */
@@ -45,27 +45,32 @@ public:
         {
             return 2;
         }
-        int lef = get(root->left);
-        int ri = get(root->right);
-        if (lef == 0 || ri == 0)
+        int left = get(root->left);
+        int right = get(root->right);
+        if (left == 2 && right == 2)
+        {
+
+            return 0;
+        }
+        else if (left == 0 || right == 0)
         {
             sum++;
             return 1;
         }
-        if (lef == 1 || ri == 1)
-        {
-
-            return 2;
-        }
-        return 0;
+        return 2;
     }
+
     int minCameraCover(TreeNode *root)
     {
-        if (!get(root))
+        if (get(root) == 0)
         {
             sum++;
+            return sum;
         }
-        return sum;
+        else
+        {
+            return sum;
+        }
     }
 };
 // @lc code=end

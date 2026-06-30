@@ -39,25 +39,17 @@ public:
             return false;
         }
         int total = sum / 2;
-        vector<vector<bool>> dp(nums.size(), vector<bool>(total + 1, false));
-
-        if (nums[0] <= total)
+        vector<bool> dp(total + 1, false);
+        dp[0] = true;
+        for (int &i : nums)
         {
-            dp[0][nums[0]] = true;
-        }
-        for (int i = 1; i < nums.size(); i++)
-        {
-            for (int j = 1; j < total + 1; j++)
+            for (int j = total; j > 0; j--)
             {
-                if (j >= nums[i])
-                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i]];
-                else
-                {
-                    dp[i][j] = dp[i - 1][j];
-                }
+                if (j >= i)
+                    dp[j] = dp[j] || dp[j - i];
             }
         }
-        return dp[nums.size() - 1][total];
+        return dp[total];
     }
 };
 // @lc code=end

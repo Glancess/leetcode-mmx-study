@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=96 lang=cpp
+ * @lc app=leetcode.cn id=322 lang=cpp
  * @lcpr version=30219
  *
- * [96] 不同的二叉搜索树
+ * [322] 零钱兑换
  */
 
 // @lcpr-template-start
@@ -27,35 +27,31 @@ using namespace std;
 class Solution
 {
 public:
-    int numTrees(int n)
+    int coinChange(vector<int> &coins, int amount)
     {
-        if (n == 1)
-        {
-            return 1;
-        }
-        vector<int> dp(n + 1, 0);
-        dp[0] = 1;
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i < n + 1; i++)
-        {
-            for (int j = 0; j < i; j++)
+        vector<int> dp(amount + 1, 1e9);
+        dp[0] = 0;
+        for (int &i : coins)
+            for (int j = i; j < amount + 1; j++)
             {
-                dp[i] += dp[j] * dp[i - j - 1];
+                dp[j] = min(dp[j], dp[j - i] + 1);
             }
-        }
-        return dp[n];
+        return dp[amount] == 1e9 ? -1 : dp[amount];
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// 3\n
+// [1, 2, 5]\n11\n
 // @lcpr case=end
 
 // @lcpr case=start
-// 1\n
+// [2]\n3\n
+// @lcpr case=end
+
+// @lcpr case=start
+// [1]\n0\n
 // @lcpr case=end
 
  */

@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=617 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [617] 合并二叉树
  */
@@ -44,17 +44,18 @@ public:
         {
             return root2;
         }
-
-        if (!root2)
+        else if (!root2)
         {
             return root1;
         }
-
-        TreeNode *root = new TreeNode(root1->val + root2->val);
-        root->left = mergeTrees(root1->left, root2->left);
-        root->right = mergeTrees(root1->right, root2->right);
-        return root;
-    }
+        else
+        {
+            TreeNode *root = new TreeNode(root1->val + root2->val);
+            root->left = mergeTrees(root1->left, root2->left);
+            root->right = mergeTrees(root1->right, root2->right);
+            return root;
+        }
+        }
 };
 // @lc code=end
 

@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=96 lang=cpp
+ * @lc app=leetcode.cn id=279 lang=cpp
  * @lcpr version=30219
  *
- * [96] 不同的二叉搜索树
+ * [279] 完全平方数
  */
 
 // @lcpr-template-start
@@ -27,21 +27,23 @@ using namespace std;
 class Solution
 {
 public:
-    int numTrees(int n)
+    int numSquares(int n)
     {
-        if (n == 1)
+        vector<int> bag;
+        for (int i = 1; i * i <= n; i++)
         {
-            return 1;
+            bag.push_back(i * i);
         }
-        vector<int> dp(n + 1, 0);
-        dp[0] = 1;
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i < n + 1; i++)
+        vector<int> dp(n + 1, 1e9);
+        dp[0] = 0;
+        for (int &i : bag)
         {
-            for (int j = 0; j < i; j++)
+            for (int j = 1; j < n + 1; j++)
             {
-                dp[i] += dp[j] * dp[i - j - 1];
+                if (j >= i)
+                {
+                    dp[j] = min(dp[j - i] + 1, dp[j]);
+                }
             }
         }
         return dp[n];
@@ -51,11 +53,11 @@ public:
 
 /*
 // @lcpr case=start
-// 3\n
+// 12\n
 // @lcpr case=end
 
 // @lcpr case=start
-// 1\n
+// 13\n
 // @lcpr case=end
 
  */

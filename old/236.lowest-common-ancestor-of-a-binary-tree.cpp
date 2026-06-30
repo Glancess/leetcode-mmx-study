@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=236 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30219
  *
  * [236] 二叉树的最近公共祖先
  */
@@ -46,23 +46,19 @@ public:
         {
             return root;
         }
-        TreeNode *left = lowestCommonAncestor(root->left, p, q);
-        TreeNode *right = lowestCommonAncestor(root->right, p, q);
-        if (left && right)
+        TreeNode *le = lowestCommonAncestor(root->left, p, q);
+        TreeNode *ri = lowestCommonAncestor(root->right, p, q);
+        if (le && ri)
         {
             return root;
         }
-        else if (left)
+        else if (le)
         {
-            return left;
-        }
-        else if (right)
-        {
-            return right;
+            return le;
         }
         else
         {
-            return nullptr;
+            return ri;
         }
     }
 };

@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=96 lang=cpp
+ * @lc app=leetcode.cn id=377 lang=cpp
  * @lcpr version=30219
  *
- * [96] 不同的二叉搜索树
+ * [377] 组合总和 Ⅳ
  */
 
 // @lcpr-template-start
@@ -27,35 +27,32 @@ using namespace std;
 class Solution
 {
 public:
-    int numTrees(int n)
+    int combinationSum4(vector<int> &nums, int target)
     {
-        if (n == 1)
-        {
-            return 1;
-        }
-        vector<int> dp(n + 1, 0);
+        vector<unsigned long long> dp(target + 1, 0);
         dp[0] = 1;
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i < n + 1; i++)
+        for (int j = 1; j < target + 1; j++)
         {
-            for (int j = 0; j < i; j++)
+            for (int &i : nums)
             {
-                dp[i] += dp[j] * dp[i - j - 1];
+                if (j >= i)
+                {
+                    dp[j] += dp[j - i];
+                }
             }
         }
-        return dp[n];
+        return dp[target];
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// 3\n
+// [1,2,3]\n4\n
 // @lcpr case=end
 
 // @lcpr case=start
-// 1\n
+// [9]\n3\n
 // @lcpr case=end
 
  */

@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=450 lang=cpp
- * @lcpr version=30217
+ * @lcpr version=30219
  *
  * [450] 删除二叉搜索树中的节点
  */
@@ -46,36 +46,32 @@ public:
         }
         if (root->val == key)
         {
-            if (root->left && root->right)
-            {
-                TreeNode *cur = root->right;
-                while (cur->left)
-                {
-                    cur = cur->left;
-                }
-                cur->left = root->left;
-                return root->right;
-            }
-            else if (root->right)
+            if (!root->left)
             {
                 return root->right;
             }
-            else if (root->left)
+            if (!root->right)
             {
                 return root->left;
             }
-            else
+            if (root->left && root->right)
             {
-                return nullptr;
+                TreeNode *t = root->right;
+                while (t->left)
+                {
+                    t = t->left;
+                }
+                t->left = root->left;
+                return root->right;
             }
+        }
+        if (root->val > key)
+        {
+            root->left = deleteNode(root->left, key);
         }
         if (root->val < key)
         {
             root->right = deleteNode(root->right, key);
-        }
-        else if (root->val > key)
-        {
-            root->left = deleteNode(root->left, key);
         }
         return root;
     }
