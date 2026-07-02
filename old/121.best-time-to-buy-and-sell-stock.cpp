@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=198 lang=cpp
+ * @lc app=leetcode.cn id=121 lang=cpp
  * @lcpr version=30219
  *
- * [198] 打家劫舍
+ * [121] 买卖股票的最佳时机
  */
 
 // @lcpr-template-start
@@ -27,31 +27,28 @@ using namespace std;
 class Solution
 {
 public:
-    int rob(vector<int> &nums)
+    int maxProfit(vector<int> &prices)
     {
-        vector<int> dp(nums.size(), 0);
-        if (nums.size() == 1)
+        vector<vector<int>> dp(prices.size(), vector<int>(2, 0));
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0];
+        for (int j = 1; j < prices.size(); j++)
         {
-            return nums[0];
+            dp[j][0] = max(dp[j - 1][0], dp[j - 1][1] + prices[j]);
+            dp[j][1] = max(dp[j - 1][1], -prices[j]);
         }
-        dp[0] = nums[0];
-        dp[1] = max(nums[0], nums[1]);
-        for (int i = 2; i < nums.size(); i++)
-        {
-            dp[i] = max(dp[i - 1], dp[i - 2] + nums[i]);
-        }
-        return dp[nums.size() - 1];
+        return dp.back()[0];
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// [1,2,3,1]\n
+// [7,1,5,3,6,4]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// [2,7,9,3,1]\n
+// [7,6,4,3,1]\n
 // @lcpr case=end
 
  */

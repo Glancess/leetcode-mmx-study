@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=343 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [343] 整数拆分
  */

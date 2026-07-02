@@ -29,35 +29,40 @@ class Solution
 public:
     int findTargetSumWays(vector<int> &nums, int target)
     {
+
         int sum = 0;
         for (int &i : nums)
         {
             sum += i;
         }
-        if ((sum + target) % 2 != 0)
+        if ((sum + target) % 2 == 1)
+        {
             return 0;
+        }
         if (abs(target) > sum)
         {
             return 0;
         }
-        {
-        }
-        int total = (target + sum) / 2;
+
+        int total = (sum + target) / 2;
         vector<int> dp(total + 1, 0);
+
         dp[0] = 1;
-        for (int num : nums)
+        for (int &i : nums)
         {
-            if (num == 0)
+            if (i == 0)
             {
-                // 所有方案翻倍
-                for (int j = 0; j <= total; j++)
+                for (int j = 0; j < total + 1; j++)
+                {
                     dp[j] *= 2;
+                }
             }
             else
             {
-                // 0-1 背包
-                for (int j = total; j >= num; j--)
-                    dp[j] += dp[j - num];
+                for (int j = total; j > i - 1; j--)
+                {
+                    dp[j] += dp[j - i];
+                }
             }
         }
         return dp[total];

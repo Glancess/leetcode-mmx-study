@@ -29,41 +29,23 @@ class Solution
 public:
     int lastStoneWeightII(vector<int> &stones)
     {
-        // 本来 选两块石头，碰撞，然后a-b的绝对值。剩余的作为新石头，继续碰撞。
-        //  a1-b1 a2-b2 a3-b3 继续 a1-b1-a2+b2-a3+b3，总有些石头前面是+，有些是-
         int sum = 0;
         for (int &i : stones)
         {
             sum += i;
         }
+        // 2堆，A ，一堆B。A+B=sum ，求A-B的最小值。A=sum-B；B=sum/2；
         int total = sum / 2;
-        vector<vector<int>> dp(stones.size(), vector<int>(total + 1, 0));
-        for (int i = 0; i < stones.size(); i++)
+        vector<int> dp(total + 1, 0);
+        dp[0] = 0;
+        for (int &i : stones)
         {
-            dp[i][0] = 0;
-        }
-        for (int i = 0; i < total + 1; i++)
-        {
-            if (i >= stones[0])
+            for (int j = total; j >= i; j--)
             {
-                dp[0][i] = stones[0];
+                dp[j] = max(dp[j - i] + i, dp[j]);
             }
         }
-        for (int i = 1; i < stones.size(); i++)
-        {
-            for (int j = 1; j < total + 1; j++)
-            {
-                if (j >= stones[i])
-                {
-                    dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - stones[i]] + stones[i]);
-                }
-                else
-                {
-                    dp[i][j] = dp[i - 1][j];
-                }
-            }
-        }
-        return abs(2 * dp[stones.size() - 1][total] - sum);
+        return abs(2 * dp.back() - sum);
     }
 };
 // @lc code=end

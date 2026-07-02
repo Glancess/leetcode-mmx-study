@@ -29,12 +29,12 @@ class Solution
 public:
     int numSquares(int n)
     {
+        vector<int> dp(n + 1, 1e9);
         vector<int> bag;
         for (int i = 1; i * i <= n; i++)
         {
             bag.push_back(i * i);
         }
-        vector<int> dp(n + 1, 1e9);
         dp[0] = 0;
         for (int &i : bag)
         {
@@ -46,7 +46,7 @@ public:
                 }
             }
         }
-        return dp[n];
+        return dp.back();
     }
 };
 // @lc code=end
