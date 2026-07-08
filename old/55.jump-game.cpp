@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=55 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [55] 跳跃游戏
  */
@@ -34,9 +34,7 @@ public:
         {
             far = max(far, nums[i] + i);
             if (far >= nums.size() - 1)
-            {
                 return true;
-            }
         }
         return false;
     }

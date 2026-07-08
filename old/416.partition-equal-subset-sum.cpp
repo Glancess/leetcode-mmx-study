@@ -38,18 +38,17 @@ public:
         {
             return false;
         }
-        int total = sum / 2;
-        vector<bool> dp(total + 1, false);
+        int target = sum / 2;
+        vector<bool> dp(target + 1, false);
         dp[0] = true;
         for (int &i : nums)
         {
-            for (int j = total; j > 0; j--)
+            for (int j = target; j >= i; j--)
             {
-                if (j >= i)
-                    dp[j] = dp[j] || dp[j - i];
-            }
+                dp[j] = dp[j] || dp[j - i];
+                        }
         }
-        return dp[total];
+        return dp.back();
     }
 };
 // @lc code=end

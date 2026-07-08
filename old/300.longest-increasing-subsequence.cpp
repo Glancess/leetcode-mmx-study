@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=738 lang=cpp
+ * @lc app=leetcode.cn id=300 lang=cpp
  * @lcpr version=30219
  *
- * [738] 单调递增的数字
+ * [300] 最长递增子序列
  */
 
 // @lcpr-template-start
@@ -27,42 +27,38 @@ using namespace std;
 class Solution
 {
 public:
-    int monotoneIncreasingDigits(int n)
+    int lengthOfLIS(vector<int> &nums)
     {
-        string t = to_string(n);
-        for (int i = 0; i < t.size() - 1; i++)
+        vector<int> dp(nums.size(), 1);
+        int maxx = 1;
+        for (int i = 0; i < nums.size(); i++)
         {
-            if (t[i] > t[i + 1])
+            for (int j = 0; j < i; j++)
             {
-                t[i] -= 1;
-                while (i > 0 && t[i] < t[i - 1])
+                if (nums[j] < nums[i])
                 {
-                    i--;
-                    t[i] -= 1;
-                }
 
-                for (int k = i + 1; k < t.size(); k++)
-                {
-                    t[k] = '9';
+                    dp[i] = max(dp[i], dp[j] + 1);
+                    maxx = max(maxx, dp[i]);
                 }
             }
         }
-        return stoi(t);
+        return maxx;
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// 10\n
+// [10,9,2,5,3,7,101,18]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// 1234\n
+// [0,1,0,3,2,3]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// 332\n
+// [7,7,7,7,7,7,7]\n
 // @lcpr case=end
 
  */

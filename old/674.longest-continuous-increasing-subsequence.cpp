@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=62 lang=cpp
+ * @lc app=leetcode.cn id=674 lang=cpp
  * @lcpr version=30219
  *
- * [62] 不同路径
+ * [674] 最长连续递增序列
  */
 
 // @lcpr-template-start
@@ -27,44 +27,31 @@ using namespace std;
 class Solution
 {
 public:
-    int uniquePaths(int m, int n)
+    int findLengthOfLCIS(vector<int> &nums)
     {
-        vector<vector<int>> dp(m, vector<int>(n, 0));
-        for (int i = 0; i < n; i++)
+        vector<int> dp(nums.size(), 1);
+        int maxx = 1;
+        for (int i = 1; i < nums.size(); i++)
         {
-            dp[0][i] = 1;
-        }
-        for (int i = 0; i < m; i++)
-        {
-            dp[i][0] = 1;
-        }
-        for (int i = 1; i < m; i++)
-        {
-            for (int j = 1; j < n; j++)
+            if (nums[i] > nums[i - 1])
             {
-                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+
+                dp[i] = dp[i - 1] + 1;
+                maxx = max(maxx, dp[i]);
             }
         }
-        return dp.back().back();
+        return maxx;
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// 3\n7\n
+// [1,3,5,4,7]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// 3\n2\n
-// @lcpr case=end
-
-// @lcpr case=start
-// 7\n3\n
-// @lcpr case=end
-
-// @lcpr case=start
-// 3\n3\n
+// [2,2,2,2,2]\n
 // @lcpr case=end
 
  */

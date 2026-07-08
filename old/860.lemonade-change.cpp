@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=860 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [860] 柠檬水找零
  */
@@ -49,15 +49,14 @@ public:
                     return false;
                 }
             }
-            else
+            else if (i == 20)
             {
-
-                if (five > 0 && ten > 0)
+                if (ten > 0 && five > 0)
                 {
-                    five--;
                     ten--;
+                    five--;
                 }
-                else if (five > 2)
+                else if (five >= 3)
                 {
                     five -= 3;
                 }

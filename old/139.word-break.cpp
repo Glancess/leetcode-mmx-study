@@ -33,15 +33,15 @@ public:
         dp[0] = true;
         for (int j = 1; j < s.size() + 1; j++)
         {
-            for (auto &i : wordDict)
+            for (string &i : wordDict)
             {
-                if (j >= i.size() && dp[j - i.size()] && s.substr(j - i.size(), i.size()) == i)
+                if (i.size() <= j && dp[j - i.size()] && s.substr(j - i.size(), i.size()) == i)
                 {
                     dp[j] = true;
                 }
             }
         }
-        return dp[s.size()];
+        return dp.back();
     }
 };
 // @lc code=end

@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=62 lang=cpp
+ * @lc app=leetcode.cn id=714 lang=cpp
  * @lcpr version=30219
  *
- * [62] 不同路径
+ * [714] 买卖股票的最佳时机含手续费
  */
 
 // @lcpr-template-start
@@ -27,23 +27,15 @@ using namespace std;
 class Solution
 {
 public:
-    int uniquePaths(int m, int n)
+    int maxProfit(vector<int> &prices, int fee)
     {
-        vector<vector<int>> dp(m, vector<int>(n, 0));
-        for (int i = 0; i < n; i++)
+        vector<vector<int>> dp(prices.size(), vector<int>(2, 0));
+        dp[0][0] = -prices[0];
+        dp[0][1] = 0;
+        for (int j = 1; j < prices.size(); j++)
         {
-            dp[0][i] = 1;
-        }
-        for (int i = 0; i < m; i++)
-        {
-            dp[i][0] = 1;
-        }
-        for (int i = 1; i < m; i++)
-        {
-            for (int j = 1; j < n; j++)
-            {
-                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-            }
+            dp[j][0] = max(dp[j - 1][0], dp[j - 1][1] - prices[j]);
+            dp[j][1] = max(dp[j - 1][1], dp[j - 1][0] + prices[j] - fee);
         }
         return dp.back().back();
     }
@@ -52,19 +44,11 @@ public:
 
 /*
 // @lcpr case=start
-// 3\n7\n
+// [1, 3, 2, 8, 4, 9]\n2\n
 // @lcpr case=end
 
 // @lcpr case=start
-// 3\n2\n
-// @lcpr case=end
-
-// @lcpr case=start
-// 7\n3\n
-// @lcpr case=end
-
-// @lcpr case=start
-// 3\n3\n
+// [1,3,7,5,10,3]\n3\n
 // @lcpr case=end
 
  */

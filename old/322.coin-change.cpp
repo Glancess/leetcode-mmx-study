@@ -32,10 +32,12 @@ public:
         vector<int> dp(amount + 1, 1e9);
         dp[0] = 0;
         for (int &i : coins)
-            for (int j = i; j < amount + 1; j++)
+        {
+            for (int j = i; j < dp.size(); j++)
             {
                 dp[j] = min(dp[j], dp[j - i] + 1);
             }
+        }
         return dp[amount] == 1e9 ? -1 : dp[amount];
     }
 };

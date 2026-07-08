@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=452 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [452] 用最少数量的箭引爆气球
  */
@@ -31,13 +31,15 @@ public:
     {
         sort(points.begin(), points.end(), [](auto &i, auto &j)
              {
-            if(i[0]!=j[0]){
-                return i[0]<j[0];
-            }else{
-                return i[1]<j[1];
-            } });
+                 if (i[0] != j[0])
+                 {
+                    return i[0]<j[0];
+                 }else{
+                    
+                    return i[1]<j[1];
+                 } });
+        int resu = 1;
         auto same = points[0];
-        int sum = 1;
         for (int i = 1; i < points.size(); i++)
         {
             if (points[i][0] <= same[1])
@@ -47,11 +49,11 @@ public:
             }
             else
             {
-                sum++;
                 same = points[i];
+                resu++;
             }
         }
-        return sum;
+        return resu;
     }
 };
 // @lc code=end

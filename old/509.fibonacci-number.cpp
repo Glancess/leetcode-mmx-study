@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=509 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [509] 斐波那契数
  */
@@ -40,7 +40,7 @@ public:
         {
             dp[i] = dp[i - 1] + dp[i - 2];
         }
-        return dp[n];
+        return dp.back();
     }
 };
 // @lc code=end

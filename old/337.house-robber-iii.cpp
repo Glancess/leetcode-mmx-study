@@ -44,15 +44,15 @@ public:
         {
             return {0, 0};
         }
-        vector<int> le = robb(root->left);
-        vector<int> ri = robb(root->right);
-        return {
-            le[1] + ri[1] + root->val, max(le[0], le[1]) + max(ri[0], ri[1])};
+        auto l = robb(root->left);
+        auto r = robb(root->right);
+        return {root->val + l[1] + r[1], max(l[1], l[0]) + max(r[1], r[0])};
     }
 
     int rob(TreeNode *root)
     {
-        return max(robb(root)[0], robb(root)[1]);
+        auto resu = robb(root);
+        return max(resu[0], resu[1]);
     }
 };
 // @lc code=end

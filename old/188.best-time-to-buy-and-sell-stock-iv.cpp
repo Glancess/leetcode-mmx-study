@@ -32,30 +32,36 @@ public:
         vector<vector<int>> dp(prices.size(), vector<int>(2 * k, 0));
         for (int i = 0; i < 2 * k; i++)
         {
-            if (i % 2 == 0)
-                dp[0][i] = -prices[0];
-            else
-                dp[0][i] = 0;
-            // 偶数为买，奇数为卖
-        }
-        for (int i = 1; i < prices.size(); i++)
-        {
-            for (int j = 0; j < 2 * k; j++)
+            if (i % 2)
             {
-
-                if (j == 0)
-                {
-                    dp[i][0] = max(dp[i - 1][0],
-                                   -prices[i]);
-                }
-
-                else if (j % 2 == 0)
-                    dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - 1] - prices[i]);
-                else
-                    dp[i][j] = max(dp[i - 1][j - 1] + prices[i], dp[i - 1][j]);
+                dp[0][i] = 0;
+            }
+            else
+            {
+                dp[0][i] = -prices[0];
             }
         }
-        return dp[prices.size() - 1][2 * k - 1];
+        for (int j = 1; j < prices.size(); j++)
+        {
+            for (int i = 0; i < 2 * k; i++)
+            {
+                if (i == 0)
+
+                {
+
+                    dp[j][0] = max(dp[j - 1][0], -prices[j]);
+                }
+                else if (i % 2)
+                {
+                    dp[j][i] = max(dp[j - 1][i], dp[j - 1][i - 1] + prices[j]);
+                }
+                else
+                {
+                    dp[j][i] = max(dp[j - 1][i], dp[j - 1][i - 1] - prices[j]);
+                }
+            }
+        }
+        return dp.back()[2 * k - 1];
     }
 };
 // @lc code=end

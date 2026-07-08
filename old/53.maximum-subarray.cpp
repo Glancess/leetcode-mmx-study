@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=53 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [53] 最大子数组和
  */
@@ -29,19 +29,19 @@ class Solution
 public:
     int maxSubArray(vector<int> &nums)
     {
-        int cur = nums[0];
-        int maxx = nums[0];
+        int cursum = nums[0];
+        int maxx = cursum;
         for (int i = 1; i < nums.size(); i++)
         {
-            if (cur < 0)
+            if (cursum < 0)
             {
-                cur = nums[i];
+                cursum = nums[i];
             }
             else
             {
-                cur += nums[i];
+                cursum += nums[i];
             }
-            maxx = max(cur, maxx);
+            maxx = max(cursum, maxx);
         }
         return maxx;
     }

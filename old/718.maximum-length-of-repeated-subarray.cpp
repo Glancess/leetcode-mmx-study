@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=377 lang=cpp
+ * @lc app=leetcode.cn id=718 lang=cpp
  * @lcpr version=30219
  *
- * [377] 组合总和 Ⅳ
+ * [718] 最长重复子数组
  */
 
 // @lcpr-template-start
@@ -27,32 +27,19 @@ using namespace std;
 class Solution
 {
 public:
-    int combinationSum4(vector<int> &nums, int target)
+    int findLength(vector<int> &nums1, vector<int> &nums2)
     {
-        vector<unsigned long long> dp(target + 1, 0);
-        dp[0] = 1;
-        for (int j = 1; j < target + 1; j++)
-        {
-            for (int &i : nums)
-            {
-                if (j >= i)
-                {
-                    dp[j] += dp[j - i];
-                }
-            }
-        }
-        return dp.back();
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// [1,2,3]\n4\n
+// [1,2,3,2,1]\n[3,2,1,4,7]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// [9]\n3\n
+// [0,0,0,0,0]\n[0,0,0,0,0]\n
 // @lcpr case=end
 
  */

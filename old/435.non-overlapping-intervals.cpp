@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=435 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [435] 无重叠区间
  */
@@ -29,28 +29,30 @@ class Solution
 public:
     int eraseOverlapIntervals(vector<vector<int>> &intervals)
     {
-        int sum = 0;
-        sort(intervals.begin(), intervals.end(), [](auto &a, auto &b)
+        sort(intervals.begin(), intervals.end(), [](auto &i, auto &j)
              {
-            if(a[0]!=b[0]){
-                return a[0]<b[0];
+            if(i[0]!=j[0]){
+                
+                return i[0]<j[0];
             }else{
-                return a[1]<b[1];
+
+                return i[1]<j[1];
             } });
-        auto same = intervals[0];
+        int count = 0;
+        vector<int> same = intervals[0];
         for (int i = 1; i < intervals.size(); i++)
         {
             if (intervals[i][0] < same[1])
             {
-                sum++;
-                same = same[1] < intervals[i][1] ? same : intervals[i];
+                count++;
+                same = intervals[i][1] < same[1] ? intervals[i] : same;
             }
             else
             {
                 same = intervals[i];
             }
         }
-        return sum;
+        return count;
     }
 };
 // @lc code=end

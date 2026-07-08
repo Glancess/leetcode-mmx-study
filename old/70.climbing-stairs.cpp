@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=70 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [70] 爬楼梯
  */
@@ -36,7 +36,7 @@ public:
         {
             dp[i] = dp[i - 1] + dp[i - 2];
         }
-        return dp[n];
+        return dp.back();
     }
 };
 // @lc code=end

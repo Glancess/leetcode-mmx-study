@@ -33,10 +33,9 @@ public:
         dp[0] = 1;
         for (int &i : coins)
         {
-            for (int j = 1; j < amount + 1; j++)
+            for (int j = i; j < dp.size(); j++)
             {
-                if (j >= i)
-                    dp[j] += dp[j - i];
+                dp[j] += dp[j - i];
             }
         }
         return dp[amount];

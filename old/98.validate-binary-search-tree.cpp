@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=98 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [98] 验证二叉搜索树
  */
@@ -46,8 +46,7 @@ public:
         {
             return true;
         }
-        bool le = isValidBST(root->left);
-        if (!le)
+        if (!isValidBST(root->left))
         {
             return false;
         }
@@ -56,8 +55,7 @@ public:
             return false;
         }
         pre = root;
-        bool ri = isValidBST(root->right);
-        if (!ri)
+        if (!isValidBST(root->right))
         {
             return false;
         }

@@ -29,11 +29,11 @@ class Solution
 public:
     int robb(vector<int> &nums, int left, int right)
     {
-
-        if (right < left)
+        if (left > right)
         {
-            return 0;
+            return nums[0];
         }
+
         if (left == right)
         {
             return nums[left];
@@ -43,16 +43,14 @@ public:
         dp[1] = max(nums[left], nums[left + 1]);
         for (int i = 2; i < dp.size(); i++)
         {
-            dp[i] = max(dp[i - 1], dp[i - 2] + nums[left + i]);
+            dp[i] = max(dp[i - 2] + nums[left + i], dp[i - 1]);
         }
         return dp.back();
     }
+
     int rob(vector<int> &nums)
     {
-        if (nums.size() == 1)
-        {
-            return nums[0];
-        }
+
         return max(robb(nums, 0, nums.size() - 2), robb(nums, 1, nums.size() - 1));
     }
 };
