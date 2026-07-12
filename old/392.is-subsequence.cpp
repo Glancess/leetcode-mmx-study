@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=494 lang=cpp
+ * @lc app=leetcode.cn id=392 lang=cpp
  * @lcpr version=30219
  *
- * [494] 目标和
+ * [392] 判断子序列
  */
 
 // @lcpr-template-start
@@ -27,50 +27,35 @@ using namespace std;
 class Solution
 {
 public:
-    int findTargetSumWays(vector<int> &nums, int target)
+    bool isSubsequence(string s, string t)
     {
-        int sum = 0;
-        for (int &i : nums)
+        vector<vector<int>> dp(s.size() + 1, vector<int>(t.size() + 1, 0));
+        for (int i = 1; i < s.size() + 1; i++)
         {
-            sum += i;
-        }
-        if ((target + sum) % 2)
-        {
-            return 0;
-        }
-        if (abs(target) > sum)
-        {
-            return 0;
-        }
-        int total = (sum + target) / 2;
-        vector<int> dp(total + 1, 0);
-        dp[0] = 1;
-        for (int &i : nums)
-        {
-            for (int j = total; j >= i; j--)
+            for (int j = 1; j < t.size() + 1; j++)
             {
-                if (i == 0)
+                if (s[i - 1] == t[j - 1])
                 {
-                    dp[j] *= 2;
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
                 }
                 else
                 {
-                    dp[j] += dp[j - i];
+                    dp[i][j] = dp[i][j - 1];
                 }
             }
         }
-        return dp.back();
+        return dp.back().back() == s.size();
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// [1,1,1,1,1]\n3\n
+// "abc"\n"ahbgdc"\n
 // @lcpr case=end
 
 // @lcpr case=start
-// [1]\n1\n
+// "axc"\n"ahbgdc"\n
 // @lcpr case=end
 
  */

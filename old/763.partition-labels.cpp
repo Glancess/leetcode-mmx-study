@@ -29,21 +29,21 @@ class Solution
 public:
     vector<int> partitionLabels(string s)
     {
-        vector<int> index(26, 0);
+        vector<int> searccc(26, 0);
         for (int i = 0; i < s.size(); i++)
         {
-            index[s[i] - 'a'] = i;
+            searccc[s[i] - 'a'] = i;
         }
-        int left = 0;
-        int right = 0;
+        int far = 0;
+        int j = 0;
         vector<int> resu;
         for (int i = 0; i < s.size(); i++)
         {
-            right = max(right, index[s[i] - 'a']);
-            if (i == right)
+            far = max(searccc[s[i] - 'a'], far);
+            if (i == far)
             {
-                resu.push_back(right - left + 1);
-                left = right + 1;
+                resu.push_back(i - j + 1);
+                j = i + 1;
             }
         }
         return resu;

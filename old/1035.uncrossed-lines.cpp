@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=718 lang=cpp
+ * @lc app=leetcode.cn id=1035 lang=cpp
  * @lcpr version=30219
  *
- * [718] 最长重复子数组
+ * [1035] 不相交的线
  */
 
 // @lcpr-template-start
@@ -27,7 +27,7 @@ using namespace std;
 class Solution
 {
 public:
-    int findLength(vector<int> &nums1, vector<int> &nums2)
+    int maxUncrossedLines(vector<int> &nums1, vector<int> &nums2)
     {
         int maxx = 0;
         vector<vector<int>> dp(nums1.size() + 1, vector<int>(nums2.size() + 1, 0));
@@ -38,8 +38,12 @@ public:
                 if (nums1[i - 1] == nums2[j - 1])
                 {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
-                    maxx = max(dp[i][j], maxx);
                 }
+                else
+                {
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+                }
+                maxx = max(maxx, dp[i][j]);
             }
         }
         return maxx;
@@ -49,11 +53,15 @@ public:
 
 /*
 // @lcpr case=start
-// [1,2,3,2,1]\n[3,2,1,4,7]\n
+// [1,4,2]\n[1,2,4]\n
 // @lcpr case=end
 
 // @lcpr case=start
-// [0,0,0,0,0]\n[0,0,0,0,0]\n
+// [2,5,1,2,5]\n[10,5,2,1,5,2]\n
+// @lcpr case=end
+
+// @lcpr case=start
+// [1,3,7,1,7,5]\n[1,9,2,5,1]\n
 // @lcpr case=end
 
  */

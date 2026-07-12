@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=494 lang=cpp
+ * @lc app=leetcode.cn id=1143 lang=cpp
  * @lcpr version=30219
  *
- * [494] 目标和
+ * [1143] 最长公共子序列
  */
 
 // @lcpr-template-start
@@ -27,50 +27,41 @@ using namespace std;
 class Solution
 {
 public:
-    int findTargetSumWays(vector<int> &nums, int target)
+    int longestCommonSubsequence(string text1, string text2)
     {
-        int sum = 0;
-        for (int &i : nums)
+        int maxx = 0;
+        vector<vector<int>> dp(text1.size() + 1, vector<int>(text2.size() + 1, 0));
+        for (int i = 1; i < text1.size() + 1; i++)
         {
-            sum += i;
-        }
-        if ((target + sum) % 2)
-        {
-            return 0;
-        }
-        if (abs(target) > sum)
-        {
-            return 0;
-        }
-        int total = (sum + target) / 2;
-        vector<int> dp(total + 1, 0);
-        dp[0] = 1;
-        for (int &i : nums)
-        {
-            for (int j = total; j >= i; j--)
+            for (int j = 1; j < text2.size() + 1; j++)
             {
-                if (i == 0)
+                if (text1[i - 1] == text2[j - 1])
                 {
-                    dp[j] *= 2;
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
                 }
                 else
                 {
-                    dp[j] += dp[j - i];
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
                 }
+                maxx = max(maxx, dp[i][j]);
             }
         }
-        return dp.back();
+        return maxx;
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// [1,1,1,1,1]\n3\n
+// "abcde"\n"ace"\n
 // @lcpr case=end
 
 // @lcpr case=start
-// [1]\n1\n
+// "abc"\n"abc"\n
+// @lcpr case=end
+
+// @lcpr case=start
+// "abc"\n"def"\n
 // @lcpr case=end
 
  */

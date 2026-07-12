@@ -29,24 +29,21 @@ class Solution
 public:
     int numSquares(int n)
     {
-        vector<int> dp(n + 1, 1e9);
-        vector<int> bag;
+        vector<int> num;
         for (int i = 1; i * i <= n; i++)
         {
-            bag.push_back(i * i);
+            num.push_back(i * i);
         }
+        vector<int> dp(n + 1, 1e9);
         dp[0] = 0;
-        for (int &i : bag)
+        for (int &i : num)
         {
-            for (int j = 1; j < n + 1; j++)
+            for (int j = i; j < n + 1; j++)
             {
-                if (j >= i)
-                {
-                    dp[j] = min(dp[j - i] + 1, dp[j]);
-                }
+                dp[j] = min(dp[j - i] + 1, dp[j]);
             }
         }
-        return dp.back();
+        return dp[n];
     }
 };
 // @lc code=end

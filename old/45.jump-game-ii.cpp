@@ -29,9 +29,9 @@ class Solution
 public:
     int jump(vector<int> &nums)
     {
-        int cur = 0;
-        int sum = 0;
+        int step = 0;
         int far = 0;
+        int cur = 0;
         if (nums.size() == 1)
         {
             return 0;
@@ -41,15 +41,15 @@ public:
             far = max(far, nums[i] + i);
             if (i == cur)
             {
+                step++;
                 cur = far;
-                sum++;
             }
             if (cur >= nums.size() - 1)
             {
-                return sum;
+                return step;
             }
         }
-        return sum;
+        return 0;
     }
 };
 // @lc code=end

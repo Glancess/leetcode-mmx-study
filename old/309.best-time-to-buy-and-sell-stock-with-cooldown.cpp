@@ -30,7 +30,6 @@ public:
     int maxProfit(vector<int> &prices)
     {
         vector<vector<int>> dp(prices.size(), vector<int>(4, 0));
-        // 0 表示持有 1表示自由期，2表示卖出 3表示冷冻期
         dp[0][0] = -prices[0];
         dp[0][1] = 0;
         dp[0][2] = 0;

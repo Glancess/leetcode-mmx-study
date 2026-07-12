@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=406 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [406] 根据身高重建队列
  */
@@ -34,11 +34,14 @@ public:
             if(i[0]!=j[0]){
                 return i[0]>j[0];
             }else{
+
                 return i[1]<j[1];
+
             } });
         vector<vector<int>> resu;
         for (auto &i : people)
         {
+
             resu.insert(resu.begin() + i[1], i);
         }
         return resu;

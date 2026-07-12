@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=494 lang=cpp
+ * @lc app=leetcode.cn id=583 lang=cpp
  * @lcpr version=30219
  *
- * [494] 目标和
+ * [583] 两个字符串的删除操作
  */
 
 // @lcpr-template-start
@@ -27,50 +27,43 @@ using namespace std;
 class Solution
 {
 public:
-    int findTargetSumWays(vector<int> &nums, int target)
+    int minDistance(string word1, string word2)
     {
-        int sum = 0;
-        for (int &i : nums)
+        vector<vector<int>> dp(word1.size() + 1, vector<int>(word2.size() + 1, 0));
+        for (int i = 0; i < word1.size() + 1; i++)
         {
-            sum += i;
+            dp[i][0] = i;
         }
-        if ((target + sum) % 2)
+        for (int i = 0; i < word2.size() + 1; i++)
         {
-            return 0;
+            dp[0][i] = i;
         }
-        if (abs(target) > sum)
+        for (int i = 1; i < word1.size() + 1; i++)
         {
-            return 0;
-        }
-        int total = (sum + target) / 2;
-        vector<int> dp(total + 1, 0);
-        dp[0] = 1;
-        for (int &i : nums)
-        {
-            for (int j = total; j >= i; j--)
+            for (int j = 1; j < word2.size() + 1; j++)
             {
-                if (i == 0)
+                if (word1[i - 1] == word2[j - 1])
                 {
-                    dp[j] *= 2;
+                    dp[i][j] = dp[i - 1][j - 1];
                 }
                 else
                 {
-                    dp[j] += dp[j - i];
+                    dp[i][j] = min(dp[i - 1][j] + 1, dp[i][j - 1] + 1);
                 }
             }
         }
-        return dp.back();
+        return dp.back().back();
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// [1,1,1,1,1]\n3\n
+// "sea"\n"eat"\n
 // @lcpr case=end
 
 // @lcpr case=start
-// [1]\n1\n
+// "leetcode"\n"etco"\n
 // @lcpr case=end
 
  */
