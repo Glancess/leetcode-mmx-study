@@ -1,8 +1,8 @@
 /*
- * @lc app=leetcode.cn id=115 lang=cpp
+ * @lc app=leetcode.cn id=72 lang=cpp
  * @lcpr version=30219
  *
- * [115] 不同的子序列
+ * [72] 编辑距离
  */
 
 // @lcpr-template-start
@@ -27,25 +27,29 @@ using namespace std;
 class Solution
 {
 public:
-    int numDistinct(string s, string t)
+    int minDistance(string word1, string word2)
     {
-        vector<vector<unsigned long long>> dp(s.size() + 1, vector<unsigned long long>(t.size() + 1, 0));
-        for (int i = 0; i < s.size() + 1; i++)
+        vector<vector<int>> dp(word1.size() + 1, vector<int>(word2.size() + 1, 0));
+        for (int i = 0; i < word1.size() + 1; i++)
         {
-            dp[i][0] = 1;
+            dp[i][0] = i;
         }
-        for (int i = 1; i < s.size() + 1; i++)
+        for (int j = 0; j < word2.size() + 1; j++)
         {
+            dp[0][j] = j;
+        }
 
-            for (int j = 1; j < t.size() + 1; j++)
+        for (int i = 1; i < word1.size() + 1; i++)
+        {
+            for (int j = 1; j < word2.size() + 1; j++)
             {
-                if (s[i - 1] == t[j - 1])
+                if (word1[i - 1] == word2[j - 1])
                 {
-                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+                    dp[i][j] = dp[i - 1][j - 1];
                 }
                 else
                 {
-                    dp[i][j] = dp[i - 1][j];
+                    dp[i][j] = min({dp[i - 1][j], dp[i - 1][j - 1], dp[i][j - 1]}) + 1;
                 }
             }
         }
@@ -56,11 +60,11 @@ public:
 
 /*
 // @lcpr case=start
-// "rabbbit"\n"rabbit"\n
+// "horse"\n"ros"\n
 // @lcpr case=end
 
 // @lcpr case=start
-// "babgbag"\n"bag"\n
+// "intention"\n"execution"\n
 // @lcpr case=end
 
  */

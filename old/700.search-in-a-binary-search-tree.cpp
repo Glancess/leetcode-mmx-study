@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=700 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [700] 二叉搜索树中的搜索
  */
@@ -44,18 +44,19 @@ public:
         {
             return nullptr;
         }
-        if (root->val > val)
-        {
-            return searchBST(root->left, val);
-        }
-        else if (root->val < val)
+        if (val > root->val)
         {
             return searchBST(root->right, val);
+        }
+        else if (val < root->val)
+        {
+            return searchBST(root->left, val);
         }
         else
         {
             return root;
         }
+        return nullptr;
     }
 };
 // @lc code=end

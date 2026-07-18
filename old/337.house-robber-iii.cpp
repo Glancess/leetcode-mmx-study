@@ -43,15 +43,14 @@ public:
         if (!root)
         {
             return {0, 0};
-        }
-        auto l = robb(root->left);
-        auto r = robb(root->right);
-        return {root->val + l[1] + r[1], max(l[1], l[0]) + max(r[1], r[0])};
+        } // 左偷，右不偷。
+        auto i = robb(root->left);
+        auto j = robb(root->right);
+        return {i[1] + j[1] + root->val, max(i[0], i[1]) + max(j[0], j[1])};
     }
-
     int rob(TreeNode *root)
     {
-        auto resu = robb(root);
+        vector<int> resu = robb(root);
         return max(resu[0], resu[1]);
     }
 };

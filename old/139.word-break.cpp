@@ -33,9 +33,9 @@ public:
         dp[0] = true;
         for (int j = 1; j < s.size() + 1; j++)
         {
-            for (string &i : wordDict)
+            for (auto &i : wordDict)
             {
-                if (i.size() <= j && dp[j - i.size()] && s.substr(j - i.size(), i.size()) == i)
+                if (j >= i.size() && dp[j - i.size()] && s.substr(j - i.size(), i.size()) == i)
                 {
                     dp[j] = true;
                 }

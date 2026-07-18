@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=530 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [530] 二叉搜索树的最小绝对差
  */
@@ -38,27 +38,26 @@ using namespace std;
 class Solution
 {
 public:
+    int minn = 1e9;
     TreeNode *pre = nullptr;
-    int result = 1e9;
-    void get(TreeNode *root)
+    void getmin(TreeNode *root)
     {
         if (!root)
         {
             return;
         }
-        get(root->left);
-
+        getmin(root->left);
         if (pre)
         {
-            result = result < root->val - pre->val ? result : root->val - pre->val;
+            minn = root->val - pre->val < minn ? root->val - pre->val : minn;
         }
         pre = root;
-        get(root->right);
+        getmin(root->right);
     }
     int getMinimumDifference(TreeNode *root)
     {
-        get(root);
-        return result;
+        getmin(root);
+        return minn;
     }
 };
 // @lc code=end

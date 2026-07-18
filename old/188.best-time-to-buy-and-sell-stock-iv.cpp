@@ -30,6 +30,7 @@ public:
     int maxProfit(int k, vector<int> &prices)
     {
         vector<vector<int>> dp(prices.size(), vector<int>(2 * k, 0));
+        // 偶数持有,奇数卖掉.
         for (int i = 0; i < 2 * k; i++)
         {
             if (i % 2)
@@ -41,27 +42,42 @@ public:
                 dp[0][i] = -prices[0];
             }
         }
-        for (int j = 1; j < prices.size(); j++)
+        for (int i = 1; i < prices.size(); i++)
         {
-            for (int i = 0; i < 2 * k; i++)
+            for (int j = 0; j < 2 * k; j++)
             {
-                if (i == 0)
+                if (j % 2 == 0) // 持有
 
                 {
 
-                    dp[j][0] = max(dp[j - 1][0], -prices[j]);
+                    if (j == 0)
+
+                        dp[i][j] = max(dp[i - 1][j], -prices[i]);
+
+                    else
+
+                        dp[i][j] = max(dp[i - 1][j],
+
+                                       dp[i - 1][j - 1] - prices[i]);
                 }
-                else if (i % 2)
+
+                else // 卖出
+
                 {
-                    dp[j][i] = max(dp[j - 1][i], dp[j - 1][i - 1] + prices[j]);
-                }
-                else
-                {
-                    dp[j][i] = max(dp[j - 1][i], dp[j - 1][i - 1] - prices[j]);
+
+                    dp[i][j] = max(dp[i - 1][j],
+
+                                   dp[i - 1][j - 1] + prices[i]);
                 }
             }
         }
-        return dp.back()[2 * k - 1];
+        int maxx = 0;
+        for (int i = 0; i < 2 * k; i++)
+        {
+            if (i % 2)
+                maxx = maxx < dp.back()[i] ? dp.back()[i] : maxx;
+        }
+        return maxx;
     }
 };
 // @lc code=end

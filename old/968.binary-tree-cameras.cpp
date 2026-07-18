@@ -39,6 +39,7 @@ class Solution
 {
 public:
     int sum = 0;
+    // 2表示覆盖了，1表示有摄像头。0表示啥都没
     int get(TreeNode *root)
     {
         if (!root)
@@ -49,28 +50,24 @@ public:
         int right = get(root->right);
         if (left == 2 && right == 2)
         {
-
             return 0;
         }
-        else if (left == 0 || right == 0)
+        if (!left || !right)
         {
             sum++;
             return 1;
         }
         return 2;
     }
-
     int minCameraCover(TreeNode *root)
     {
-        if (get(root) == 0)
+        if (!get(root))
         {
             sum++;
             return sum;
         }
         else
-        {
             return sum;
-        }
     }
 };
 // @lc code=end

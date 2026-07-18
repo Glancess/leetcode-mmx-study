@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=404 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [404] 左叶子之和
  */
@@ -45,12 +45,9 @@ public:
         {
             return;
         }
-        if (root->left)
+        if (root->left && !root->left->left && !root->left->right)
         {
-            if (!root->left->left && !root->left->right)
-            {
-                sum += root->left->val;
-                        }
+            sum += root->left->val;
         }
         get(root->left);
         get(root->right);

@@ -29,7 +29,6 @@ class Solution
 public:
     int maxUncrossedLines(vector<int> &nums1, vector<int> &nums2)
     {
-        int maxx = 0;
         vector<vector<int>> dp(nums1.size() + 1, vector<int>(nums2.size() + 1, 0));
         for (int i = 1; i < nums1.size() + 1; i++)
         {
@@ -41,12 +40,11 @@ public:
                 }
                 else
                 {
-                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+                    dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
                 }
-                maxx = max(maxx, dp[i][j]);
             }
         }
-        return maxx;
+        return dp.back().back();
     }
 };
 // @lc code=end

@@ -32,12 +32,12 @@ public:
         vector<vector<int>> dp(prices.size(), vector<int>(2, 0));
         dp[0][0] = -prices[0];
         dp[0][1] = 0;
-        for (int j = 1; j < prices.size(); j++)
+        for (int i = 1; i < prices.size(); i++)
         {
-            dp[j][0] = max(dp[j - 1][0], dp[j - 1][1] - prices[j]);
-            dp[j][1] = max(dp[j - 1][1], dp[j - 1][0] + prices[j] - fee);
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
+            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - fee + prices[i]);
         }
-        return dp.back().back();
+        return dp.back()[1];
     }
 };
 // @lc code=end
