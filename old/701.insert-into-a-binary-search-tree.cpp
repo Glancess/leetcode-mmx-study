@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=701 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [701] 二叉搜索树中的插入操作
  */
@@ -44,11 +44,12 @@ public:
         {
             return new TreeNode(val);
         }
-        if (val < root->val)
+        if (root->val > val)
         {
             root->left = insertIntoBST(root->left, val);
         }
-        else if (val > root->val)
+
+        if (root->val < val)
         {
             root->right = insertIntoBST(root->right, val);
         }

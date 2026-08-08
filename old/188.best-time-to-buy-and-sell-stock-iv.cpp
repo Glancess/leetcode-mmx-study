@@ -29,53 +29,41 @@ class Solution
 public:
     int maxProfit(int k, vector<int> &prices)
     {
+        // 定义 偶数持有，奇数不持有
         vector<vector<int>> dp(prices.size(), vector<int>(2 * k, 0));
-        // 偶数持有,奇数卖掉.
         for (int i = 0; i < 2 * k; i++)
         {
-            if (i % 2)
-            {
-                dp[0][i] = 0;
-            }
-            else
+            if (i % 2 == 0)
             {
                 dp[0][i] = -prices[0];
             }
-        }
-        for (int i = 1; i < prices.size(); i++)
-        {
-            for (int j = 0; j < 2 * k; j++)
+            else
             {
-                if (j % 2 == 0) // 持有
-
+                dp[0][i] = 0;
+            }
+        }
+        for (int j = 1; j < prices.size(); j++)
+        {
+            for (int i = 0; i < 2 * k; i++)
+            {
+                if (i == 0)
                 {
-
-                    if (j == 0)
-
-                        dp[i][j] = max(dp[i - 1][j], -prices[i]);
-
-                    else
-
-                        dp[i][j] = max(dp[i - 1][j],
-
-                                       dp[i - 1][j - 1] - prices[i]);
+                    dp[j][0] = max(-prices[j], dp[j - 1][0]);
                 }
-
-                else // 卖出
-
+                else if (i % 2 == 0)
                 {
-
-                    dp[i][j] = max(dp[i - 1][j],
-
-                                   dp[i - 1][j - 1] + prices[i]);
+                    dp[j][i] = max(dp[j - 1][i - 1] - prices[j], dp[j - 1][i]);
+                }
+                else if (i % 2 == 1)
+                {
+                    dp[j][i] = max(dp[j - 1][i - 1] + prices[j], dp[j - 1][i]);
                 }
             }
         }
         int maxx = 0;
         for (int i = 0; i < 2 * k; i++)
         {
-            if (i % 2)
-                maxx = maxx < dp.back()[i] ? dp.back()[i] : maxx;
+            maxx = max(maxx, dp.back()[i]);
         }
         return maxx;
     }

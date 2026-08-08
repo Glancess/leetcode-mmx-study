@@ -38,24 +38,23 @@ using namespace std;
 class Solution
 {
 public:
-    int isbanlanced(TreeNode *root)
+    int is(TreeNode *root)
     {
         if (!root)
         {
             return 0;
         }
-
-        int left = isbanlanced(root->left);
+        int left = is(root->left);
         if (left == -1)
         {
             return -1;
         }
-        int right = isbanlanced(root->right);
+        int right = is(root->right);
         if (right == -1)
         {
             return -1;
         }
-        if (abs(left - right) > 1)
+        if (abs(left - right) >= 2)
         {
             return -1;
         }
@@ -66,7 +65,7 @@ public:
     }
     bool isBalanced(TreeNode *root)
     {
-        return isbanlanced(root) == -1 ? false : true;
+        return is(root) == -1 ? false : true;
     }
 };
 // @lc code=end

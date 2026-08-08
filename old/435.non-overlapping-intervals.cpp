@@ -32,20 +32,21 @@ public:
         sort(intervals.begin(), intervals.end(), [](auto &i, auto &j)
              {
             if(i[0]!=j[0]){
-                
                 return i[0]<j[0];
             }else{
-
                 return i[1]<j[1];
             } });
         int count = 0;
-        vector<int> same = intervals[0];
+        auto same = intervals[0];
         for (int i = 1; i < intervals.size(); i++)
         {
             if (intervals[i][0] < same[1])
             {
                 count++;
-                same = intervals[i][1] < same[1] ? intervals[i] : same;
+                if (intervals[i][1] < same[1])
+                {
+                    same = intervals[i];
+                }
             }
             else
             {

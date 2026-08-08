@@ -30,7 +30,6 @@ public:
     int longestCommonSubsequence(string text1, string text2)
     {
         vector<vector<int>> dp(text1.size() + 1, vector<int>(text2.size() + 1, 0));
-        int maxx = 0;
         for (int i = 1; i < text1.size() + 1; i++)
         {
             for (int j = 1; j < text2.size() + 1; j++)
@@ -43,10 +42,9 @@ public:
                 {
                     dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
                 }
-                maxx = max(dp[i][j], maxx);
             }
-        }
-        return maxx;
+                }
+        return dp.back().back();
     }
 };
 // @lc code=end

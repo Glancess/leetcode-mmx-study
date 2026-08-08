@@ -34,10 +34,8 @@ public:
         {
             sum += i;
         }
-        // 2堆，A ，一堆B。A+B=sum ，求A-B的最小值。A=sum-B；B=sum/2；
         int total = sum / 2;
         vector<int> dp(total + 1, 0);
-        dp[0] = 0;
         for (int &i : stones)
         {
             for (int j = total; j >= i; j--)
@@ -45,7 +43,7 @@ public:
                 dp[j] = max(dp[j - i] + i, dp[j]);
             }
         }
-        return abs(2 * dp.back() - sum);
+        return sum - 2 * dp.back();
     }
 };
 // @lc code=end

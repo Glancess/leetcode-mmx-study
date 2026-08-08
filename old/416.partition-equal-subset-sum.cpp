@@ -38,15 +38,15 @@ public:
         {
             return false;
         }
-        int target = sum / 2;
-        vector<bool> dp(target + 1, false);
+        int total = sum / 2;
+        vector<bool> dp(total + 1, false);
         dp[0] = true;
         for (int &i : nums)
         {
-            for (int j = target; j >= i; j--)
+            for (int j = total; j >= i; j--)
             {
-                dp[j] = dp[j] || dp[j - i];
-                        }
+                dp[j] = dp[j - i] || dp[j];
+            }
         }
         return dp.back();
     }

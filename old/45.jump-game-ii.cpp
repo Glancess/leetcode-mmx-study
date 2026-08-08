@@ -29,27 +29,27 @@ class Solution
 public:
     int jump(vector<int> &nums)
     {
-        int step = 0;
-        int far = 0;
-        int cur = 0;
         if (nums.size() == 1)
         {
             return 0;
         }
+        int far = 0;
+        int step = 0;
+        int maxx = far;
         for (int i = 0; i <= far; i++)
         {
-            far = max(far, nums[i] + i);
-            if (i == cur)
+            far = max(far, i + nums[i]);
+            if (i == maxx)
             {
                 step++;
-                cur = far;
+                maxx = far;
             }
-            if (cur >= nums.size() - 1)
+            if (maxx >= nums.size() - 1)
             {
                 return step;
             }
         }
-        return 0;
+        return step;
     }
 };
 // @lc code=end

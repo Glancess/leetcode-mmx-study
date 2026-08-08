@@ -31,16 +31,15 @@ public:
     {
         sort(nums.begin(), nums.end(), [](int &a, int &b)
              { return abs(a) > abs(b); });
-
         for (int &i : nums)
         {
-            if (i <= 0 && k > 0)
+            if (i < 0 && k > 0)
             {
-                k--;
                 i = -i;
+                k--;
             }
         }
-        if (k % 2 == 1)
+        if (k % 2)
         {
             nums.back() = -nums.back();
         }

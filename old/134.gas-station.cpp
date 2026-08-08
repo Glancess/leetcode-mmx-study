@@ -29,24 +29,27 @@ class Solution
 public:
     int canCompleteCircuit(vector<int> &gas, vector<int> &cost)
     {
-        int puresum = 0;
-        int sum = 0;
+        int total = 0;
+        int shengyu = 0;
         int start = 0;
         for (int i = 0; i < cost.size(); i++)
         {
-            int diff = gas[i] - cost[i];
-            puresum += diff;
-            sum += diff;
-            if (puresum < 0)
+            shengyu += (gas[i] - cost[i]);
+            total += (gas[i] - cost[i]);
+            if (shengyu < 0)
             {
                 start = i + 1;
-                puresum = 0;
+                shengyu = 0;
             }
         }
-        if (sum >= 0)
+        if (total >= 0)
+        {
             return start;
+        }
         else
+        {
             return -1;
+        }
     }
 };
 // @lc code=end

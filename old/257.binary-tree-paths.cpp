@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=257 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [257] 二叉树的所有路径
  */
@@ -39,22 +39,20 @@ class Solution
 {
 public:
     vector<string> resu;
-    void backtracking(TreeNode *root, string path)
+    void backtracking(TreeNode *root, string s)
     {
-        if (!root->left && !root->right)
+        if (!root)
         {
-            path += to_string(root->val);
-            resu.push_back(path);
             return;
         }
-        if (root->left)
+        if (!root->left && !root->right)
         {
-            backtracking(root->left, path + to_string(root->val) + "->");
+            s += to_string(root->val);
+            resu.push_back(s);
+            return;
         }
-        if (root->right)
-        {
-            backtracking(root->right, path + to_string(root->val) + "->");
-        }
+        backtracking(root->left, s + to_string(root->val) + "->");
+        backtracking(root->right, s + to_string(root->val) + "->");
     }
     vector<string> binaryTreePaths(TreeNode *root)
     {

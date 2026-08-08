@@ -44,7 +44,6 @@ public:
         {
             return nullptr;
         }
-
         if (root->val < low)
         {
             return trimBST(root->right, low, high);

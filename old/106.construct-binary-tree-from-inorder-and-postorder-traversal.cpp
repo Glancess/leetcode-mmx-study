@@ -38,7 +38,7 @@ using namespace std;
 class Solution
 {
 public:
-    int findIndex(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
+    int findindex(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
     {
         for (int i = il; i <= ir; i++)
         {
@@ -49,22 +49,28 @@ public:
         }
         return -1;
     }
-    TreeNode *gett(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
+
+    TreeNode *get(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
     {
         if (il > ir)
         {
             return nullptr;
         }
-        int index = findIndex(inorder, il, ir, postorder, pl, pr);
+        if (il == ir)
+        {
+            return new TreeNode(inorder[il]);
+        }
+        int index = findindex(inorder, il, ir, postorder, pl, pr);
         TreeNode *root = new TreeNode(inorder[index]);
-        int size = index - il;
-        root->left = gett(inorder, il, index - 1, postorder, pl, pl + size - 1);
-        root->right = gett(inorder, index + 1, ir, postorder, pl + size, pr - 1);
+        int lenn = index - il;
+        root->left = get(inorder, il, index - 1, postorder, pl, pl + lenn - 1);
+        root->right = get(inorder, index + 1, ir, postorder, pl + lenn, pr - 1);
         return root;
     }
+
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
     {
-        return gett(inorder, 0, inorder.size() - 1, postorder, 0, postorder.size() - 1);
+        return get(inorder, 0, inorder.size() - 1, postorder, 0, postorder.size() - 1);
     }
 };
 // @lc code=end

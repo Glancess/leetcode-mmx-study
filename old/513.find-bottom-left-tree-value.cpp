@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=513 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [513] 找树左下角的值
  */
@@ -38,29 +38,26 @@ using namespace std;
 class Solution
 {
 public:
-    int Maxdepth = -1;
+    int current = -1;
     int result = 0;
-    void get(TreeNode *root, int depth)
+    void getleft(TreeNode *root, int height)
     {
         if (!root)
         {
             return;
         }
-        if (depth > Maxdepth)
+        if (height > current)
         {
-            Maxdepth = depth;
             result = root->val;
+            current = height;
         }
-        get(root->left, depth + 1);
-        get(root->right, depth + 1);
+        getleft(root->left, height + 1);
+        getleft(root->right, height + 1);
     }
+
     int findBottomLeftValue(TreeNode *root)
     {
-        if (!root)
-        {
-            return 0;
-        }
-        get(root, 1);
+        getleft(root, 0);
         return result;
     }
 };

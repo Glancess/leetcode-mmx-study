@@ -33,12 +33,12 @@ public:
         dp[0] = 0;
         for (int &i : coins)
         {
-            for (int j = i; j < dp.size(); j++)
+            for (int j = i; j < amount + 1; j++)
             {
-                dp[j] = min(dp[j], dp[j - i] + 1);
+                dp[j] = min(dp[j - i] + 1, dp[j]);
             }
         }
-        return dp[amount] == 1e9 ? -1 : dp[amount];
+        return dp.back() == 1e9 ? -1 : dp.back();
     }
 };
 // @lc code=end

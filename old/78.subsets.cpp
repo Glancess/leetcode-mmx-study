@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=78 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [78] 子集
  */
@@ -27,22 +27,22 @@ using namespace std;
 class Solution
 {
 public:
-    vector<vector<int>> result;
-    vector<int> path;
-    void backtracking(vector<int> &nums, int start)
+    vector<vector<int>> resu;
+    vector<int> temp;
+    void bakctracking(vector<int> &nums, int start)
     {
-        result.push_back(path);
+        resu.push_back(temp);
         for (int i = start; i < nums.size(); i++)
         {
-            path.push_back(nums[i]);
-            backtracking(nums, i + 1);
-            path.pop_back();
+            temp.push_back(nums[i]);
+            bakctracking(nums, i + 1);
+            temp.pop_back();
         }
     }
     vector<vector<int>> subsets(vector<int> &nums)
     {
-        backtracking(nums, 0);
-        return result;
+        bakctracking(nums, 0);
+        return resu;
     }
 };
 // @lc code=end

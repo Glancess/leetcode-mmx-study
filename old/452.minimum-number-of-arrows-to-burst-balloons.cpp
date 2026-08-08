@@ -29,31 +29,30 @@ class Solution
 public:
     int findMinArrowShots(vector<vector<int>> &points)
     {
+        int count = 1;
         sort(points.begin(), points.end(), [](auto &i, auto &j)
              {
-                 if (i[0] != j[0])
-                 {
-                    return i[0]<j[0];
-                 }else{
+                if(i[0]!=j[0]){
                     
+                    return i[0]<j[0];
+                }else{
                     return i[1]<j[1];
-                 } });
-        int resu = 1;
-        auto same = points[0];
+                } });
+        vector<int> same = points[0];
         for (int i = 1; i < points.size(); i++)
         {
             if (points[i][0] <= same[1])
             {
-                same[0] = max(same[0], points[i][0]);
-                same[1] = min(same[1], points[i][1]);
+                same[0] = points[i][0];
+                same[1] = same[1] < points[i][1] ? same[1] : points[i][1];
             }
             else
             {
                 same = points[i];
-                resu++;
+                count++;
             }
         }
-        return resu;
+        return count;
     }
 };
 // @lc code=end

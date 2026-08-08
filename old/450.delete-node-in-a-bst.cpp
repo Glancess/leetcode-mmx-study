@@ -42,7 +42,7 @@ public:
     {
         if (!root)
         {
-            return nullptr;
+            return root;
         }
         if (root->val == key)
         {

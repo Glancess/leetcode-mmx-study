@@ -56,8 +56,16 @@ public:
             }
         }
         bool left = hasPathSum(root->left, targetSum - root->val);
+        if (left)
+        {
+            return true;
+        }
         bool right = hasPathSum(root->right, targetSum - root->val);
-        return left || right;
+        if (right)
+        {
+            return true;
+        }
+        return false;
     }
 };
 // @lc code=end

@@ -31,13 +31,13 @@ public:
     {
         vector<bool> dp(s.size() + 1, false);
         dp[0] = true;
-        for (int j = 1; j < s.size() + 1; j++)
+        for (int i = 1; i < s.size() + 1; i++)
         {
-            for (auto &i : wordDict)
+            for (string &j : wordDict)
             {
-                if (j >= i.size() && dp[j - i.size()] && s.substr(j - i.size(), i.size()) == i)
+                if (i >= j.size() && dp[i - j.size()] && s.substr(i - j.size(), j.size()) == j)
                 {
-                    dp[j] = true;
+                    dp[i] = true;
                 }
             }
         }

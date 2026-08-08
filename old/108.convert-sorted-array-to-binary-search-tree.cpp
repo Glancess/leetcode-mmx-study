@@ -38,20 +38,21 @@ using namespace std;
 class Solution
 {
 public:
-    TreeNode *get(vector<int> &nums, int left, int right)
+    TreeNode *build(vector<int> &nums, int l, int r)
     {
-        if (right < left)
+        if (l > r)
+        {
             return nullptr;
-        int index = (left + right) / 2;
-        TreeNode *root = new TreeNode(nums[index]);
-        root->left = get(nums, left, index - 1);
-        root->right = get(nums, index + 1, right);
+        }
+        TreeNode *root = new TreeNode(nums[(l + r) / 2]);
+        root->left = build(nums, l, (l + r) / 2 - 1);
+        root->right = build(nums, (l + r) / 2 + 1, r);
         return root;
     }
 
     TreeNode *sortedArrayToBST(vector<int> &nums)
     {
-        return get(nums, 0, nums.size() - 1);
+        return build(nums, 0, nums.size() - 1);
     }
 };
 // @lc code=end

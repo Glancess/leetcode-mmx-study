@@ -38,39 +38,36 @@ using namespace std;
 class Solution
 {
 public:
-    int getmax(int left, int right, vector<int> &nums)
+    int findindex(vector<int> &nums, int l, int r)
     {
-        int index = -1;
-        int maxx = -1e9;
-        for (int i = left; i <= right; i++)
+        int maxx = -1;
+        int maxxindex = -1;
+        for (int i = l; i <= r; i++)
         {
             if (maxx < nums[i])
             {
                 maxx = nums[i];
-                index = i;
+                maxxindex = i;
             }
         }
-        return index;
+        return maxxindex;
     }
-    TreeNode *get(int left, int right, vector<int> &nums)
+
+    TreeNode *build(vector<int> &nums, int l, int r)
     {
-        if (left == right)
-        {
-            return new TreeNode(nums[left]);
-        }
-        if (right < left)
+        if (l > r)
         {
             return nullptr;
         }
-        int ind = getmax(left, right, nums);
-        TreeNode *root = new TreeNode(nums[ind]);
-        root->left = get(left, ind - 1, nums);
-        root->right = get(ind + 1, right, nums);
+        int index = findindex(nums, l, r);
+        TreeNode *root = new TreeNode(nums[index]);
+        root->left = build(nums, l, index - 1);
+        root->right = build(nums, index + 1, r);
         return root;
     }
     TreeNode *constructMaximumBinaryTree(vector<int> &nums)
     {
-        return get(0, nums.size() - 1, nums);
+        return build(nums, 0, nums.size() - 1);
     }
 };
 // @lc code=end

@@ -38,28 +38,23 @@ class Solution
 public:
     TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
     {
-        if (!root)
-        {
+
+        if (root == nullptr)
             return nullptr;
-        }
+
         if (root == p || root == q)
-        {
             return root;
-        }
-        TreeNode *le = lowestCommonAncestor(root->left, p, q);
-        TreeNode *ri = lowestCommonAncestor(root->right, p, q);
-        if (le && ri)
-        {
+
+        TreeNode *left = lowestCommonAncestor(root->left, p, q);
+        TreeNode *right = lowestCommonAncestor(root->right, p, q);
+
+        if (left && right)
             return root;
-        }
-        else if (le)
-        {
-            return le;
-        }
-        else
-        {
-            return ri;
-        }
+
+        if (left)
+            return left;
+
+        return right;
     }
 };
 // @lc code=end

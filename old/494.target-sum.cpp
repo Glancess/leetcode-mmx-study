@@ -29,12 +29,13 @@ class Solution
 public:
     int findTargetSumWays(vector<int> &nums, int target)
     {
+
         int sum = 0;
         for (int &i : nums)
         {
             sum += i;
         }
-        if ((target + sum) % 2)
+        if ((sum + target) % 2)
         {
             return 0;
         }
@@ -47,13 +48,16 @@ public:
         dp[0] = 1;
         for (int &i : nums)
         {
-            for (int j = total; j >= i; j--)
+            if (i == 0)
             {
-                if (i == 0)
+                for (int j = 0; j < total + 1; j++)
                 {
                     dp[j] *= 2;
                 }
-                else
+            }
+            else
+            {
+                for (int j = total; j >= i; j--)
                 {
                     dp[j] += dp[j - i];
                 }

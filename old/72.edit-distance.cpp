@@ -34,11 +34,10 @@ public:
         {
             dp[i][0] = i;
         }
-        for (int j = 0; j < word2.size() + 1; j++)
+        for (int i = 0; i < word2.size() + 1; i++)
         {
-            dp[0][j] = j;
+            dp[0][i] = i;
         }
-
         for (int i = 1; i < word1.size() + 1; i++)
         {
             for (int j = 1; j < word2.size() + 1; j++)

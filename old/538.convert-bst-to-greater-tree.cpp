@@ -38,22 +38,23 @@ using namespace std;
 class Solution
 {
 public:
-    int sum = 0;
-    void get(TreeNode *root)
+    void build(TreeNode *root, int &t)
     {
         if (!root)
         {
             return;
         }
-        get(root->right);
-        int t = root->val;
-        root->val += sum;
-        sum += t;
-        get(root->left);
+        build(root->right, t);
+        int tem = root->val;
+        root->val += t;
+        t += tem;
+        build(root->left, t);
     }
+
     TreeNode *convertBST(TreeNode *root)
     {
-        get(root);
+        int t = 0;
+        build(root, t);
         return root;
     }
 };

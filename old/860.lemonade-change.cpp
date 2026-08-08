@@ -41,12 +41,12 @@ public:
             {
                 if (five > 0)
                 {
-                    five--;
                     ten++;
+                    five--;
                 }
                 else
                 {
-                    return false;
+                    return 0;
                 }
             }
             else if (i == 20)
@@ -56,7 +56,7 @@ public:
                     ten--;
                     five--;
                 }
-                else if (five >= 3)
+                else if (five > 2)
                 {
                     five -= 3;
                 }

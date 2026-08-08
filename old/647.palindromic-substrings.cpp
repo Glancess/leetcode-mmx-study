@@ -29,7 +29,7 @@ class Solution
 public:
     int countSubstrings(string s)
     {
-        int ans = 0;
+        int resu = 0;
         vector<vector<bool>> dp(s.size(), vector<bool>(s.size(), false));
         for (int i = s.size() - 1; i > -1; i--)
         {
@@ -47,10 +47,12 @@ public:
                     }
                 }
                 if (dp[i][j])
-                    ans++;
+                {
+                    resu++;
+                }
             }
         }
-        return ans;
+        return resu;
     }
 };
 // @lc code=end

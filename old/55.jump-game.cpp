@@ -27,16 +27,42 @@ using namespace std;
 class Solution
 {
 public:
-    bool canJump(vector<int> &nums)
+    int main(void)
     {
-        int far = 0;
-        for (int i = 0; i <= far; i++)
+        int n, m;
+        cin >> n >> m;
+        vector<vector<int>> graph;
+        while (m > 0)
         {
-            far = max(far, nums[i] + i);
-            if (far >= nums.size() - 1)
-                return true;
+            m--;
+            int a, b, c;
+            cin >> a >> b >> c;
+            graph.push_back({a, b, c});
         }
-        return false;
+        int src, dst, k;
+        cin >> src >> dst >> k;
+
+        vector<int> Mindis(n + 1, 1e9);
+        Mindis[src] = 0;
+        for (int i = 0; i <= k; i++)
+        {
+            auto t = Mindis;
+            for (auto &j : graph)
+            {
+                if (t[j[0]] != 1e9)
+                {
+                    Mindis[j[1]] = min(Mindis[j[1]], t[j[0]] + j[2]);
+                }
+            }
+        }
+        if (Mindis[dst] == 1e9)
+        {
+            cout << "unreachable";
+        }
+        else
+        {
+            cout << Mindis[dst];
+        }
     }
 };
 // @lc code=end

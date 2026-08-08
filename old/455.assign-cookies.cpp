@@ -1,6 +1,6 @@
 /*
  * @lc app=leetcode.cn id=455 lang=cpp
- * @lcpr version=30218
+ * @lcpr version=30219
  *
  * [455] 分发饼干
  */
@@ -30,19 +30,17 @@ public:
     int findContentChildren(vector<int> &g, vector<int> &s)
     {
         int sum = 0;
-        sort(g.begin(), g.end(), [](int &a, int &b)
-             { return a < b; });
-        sort(s.begin(), s.end(), [](int &a, int &b)
-             { return a < b; });
+        sort(g.begin(), g.end());
+        sort(s.begin(), s.end());
         int i = 0;
         int j = 0;
         while (i < g.size() && j < s.size())
         {
-            if (s[j] >= g[i])
+            if (g[i] <= s[j])
             {
                 sum++;
-                j++;
                 i++;
+                j++;
             }
             else
             {

@@ -33,12 +33,12 @@ public:
         dp[0] = 1;
         for (int &i : coins)
         {
-            for (int j = i; j < dp.size(); j++)
+            for (int j = i; j < amount + 1; j++)
             {
                 dp[j] += dp[j - i];
             }
         }
-        return dp[amount];
+        return dp.back();
     }
 };
 // @lc code=end

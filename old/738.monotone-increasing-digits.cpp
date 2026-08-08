@@ -34,16 +34,17 @@ public:
         {
             if (t[i] > t[i + 1])
             {
+                // 已经找到不符合的位置
                 t[i] -= 1;
-                while (i > 0 && t[i] < t[i - 1])
+                while (i >= 1 && t[i] < t[i - 1])
                 {
                     i--;
                     t[i] -= 1;
                 }
 
-                for (int k = i + 1; k < t.size(); k++)
+                for (int j = i + 1; j < t.size(); j++)
                 {
-                    t[k] = '9';
+                    t[j] = '9';
                 }
             }
         }
