@@ -52,11 +52,11 @@ public:
         {
             for (int j = 1; j < n; j++)
             {
-                if (!obstacleGrid[i][j])
+                if (obstacleGrid[i][j] == 0)
                     dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
             }
         }
-        return dp.back().back();
+        return dp[m - 1][n - 1];
     }
 };
 // @lc code=end

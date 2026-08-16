@@ -28,31 +28,27 @@ class Solution
 {
 public:
     vector<pair<int, int>> dr = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-    void DFS(vector<vector<int>> &heights,
-             vector<vector<bool>> &visited,
-             int x,
-             int y)
+    void DFS(vector<vector<int>> &heights, int x, int y, vector<vector<bool>> &visi)
     {
         int n = heights.size();
         int m = heights[0].size();
-
-        visited[x][y] = true;
 
         for (auto &i : dr)
         {
             int nx = x + i.first;
             int ny = y + i.second;
-
-            if (nx < 0 || nx >= n || ny < 0 || ny >= m)
+            if (nx >= n || ny >= m || nx < 0 || ny < 0)
+            {
                 continue;
-
-            if (visited[nx][ny])
+            }
+            if (visi[nx][ny])
+            {
                 continue;
-
-            // 反向搜索：只能去更高或者等高
+            }
             if (heights[nx][ny] >= heights[x][y])
             {
-                DFS(heights, visited, nx, ny);
+                visi[x][y] = true;
+                DFS(heights, nx, ny, visi);
             }
         }
     }
@@ -60,25 +56,25 @@ public:
     {
         int n = heights.size();
         int m = heights[0].size();
-        vector<vector<bool>> visited1(heights.size(), vector<bool>(heights[0].size(), false));
-        vector<vector<bool>> visited2(heights.size(), vector<bool>(heights[0].size(), false));
+
+        vector<vector<bool>> v1(n, vector<bool>(m, false));
+        vector<vector<bool>> v2(n, vector<bool>(m, false));
         for (int i = 0; i < n; i++)
         {
-            DFS(heights, visited1, i, 0);
-            DFS(heights, visited2, i, m - 1);
+            DFS(heights, i, 0, v1);
+            DFS(heights, i, m - 1, v2);
         }
         for (int i = 0; i < m; i++)
         {
-            DFS(heights, visited1, 0, i);
-            DFS(heights, visited2, n - 1, i);
+            DFS(heights, 0, i, v1);
+            DFS(heights, n - 1, i, v2);
         }
-
         vector<vector<int>> resu;
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < m; j++)
             {
-                if (visited1[i][j] && visited2[i][j])
+                if (v1[i][j] && v2[i][j])
                 {
                     resu.push_back({i, j});
                 }

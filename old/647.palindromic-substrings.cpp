@@ -29,9 +29,9 @@ class Solution
 public:
     int countSubstrings(string s)
     {
-        int resu = 0;
         vector<vector<bool>> dp(s.size(), vector<bool>(s.size(), false));
-        for (int i = s.size() - 1; i > -1; i--)
+        int ans = 0;
+        for (int i = s.size() - 1; i >= 0; i--)
         {
             for (int j = i; j < s.size(); j++)
             {
@@ -46,13 +46,17 @@ public:
                         dp[i][j] = dp[i + 1][j - 1];
                     }
                 }
+                else
+                {
+                    dp[i][j] = false;
+                }
                 if (dp[i][j])
                 {
-                    resu++;
+                    ans++;
                 }
             }
         }
-        return resu;
+        return ans;
     }
 };
 // @lc code=end

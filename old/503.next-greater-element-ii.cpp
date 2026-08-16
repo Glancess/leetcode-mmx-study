@@ -46,7 +46,7 @@ public:
             }
         }
         return resu;
-        }
+    }
 };
 // @lc code=end
 

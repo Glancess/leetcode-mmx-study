@@ -29,43 +29,47 @@ class Solution
 public:
     int networkDelayTime(vector<vector<int>> &times, int n, int k)
     {
-        vector<vector<pair<int, int>>> graph(n + 1);
+        // bell-man ford--upgrade
+
+        // i need edges
+        vector<vector<vector<int>>> edges(n + 1);
+        for (auto &i : times)
+        {
+            edges[i[0]].push_back({i[1], i[2]});
+        }
         vector<int> Mindis(n + 1, 1e9);
         Mindis[k] = 0;
         queue<int> qu;
-        vector<bool> inqu(n + 1, false);
-        for (auto &i : times)
-        {
-            graph[i[0]].push_back({i[1], i[2]});
-        }
         qu.push(k);
-        inqu[k] = true;
+        vector<bool> inque(n + 1, false);
+        inque[k] = true;
         while (!qu.empty())
         {
             int t = qu.front();
+            inque[t] = false;
             qu.pop();
-            inqu[t] = false;
-            for (auto &j : graph[t])
+            for (auto &i : edges[t])
             {
-                if (Mindis[j.first] > Mindis[t] + j.second)
+                if (Mindis[i[0]] > Mindis[t] + i[1])
                 {
-                    Mindis[j.first] = Mindis[t] + j.second;
-                    qu.push(j.first);
-                    inqu[j.first];
+                    Mindis[i[0]] = Mindis[t] + i[1];
+                    if (!inque[i[0]])
+                    {
+
+                        qu.push(i[0]);
+                        inque[i[0]] = true;
+                    }
                 }
             }
         }
         int resu = 0;
-        for (int i = 1; i < Mindis.size(); i++)
+        for (int i = 1; i < n + 1; i++)
         {
             if (Mindis[i] == 1e9)
             {
                 return -1;
             }
-            else
-            {
-                resu = max(resu, Mindis[i]);
-            }
+            resu = max(Mindis[i], resu);
         }
         return resu;
     }

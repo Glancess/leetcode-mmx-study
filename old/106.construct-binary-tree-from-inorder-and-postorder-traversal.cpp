@@ -38,39 +38,33 @@ using namespace std;
 class Solution
 {
 public:
-    int findindex(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
+    int findd(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
     {
+        int index = -1;
         for (int i = il; i <= ir; i++)
         {
             if (inorder[i] == postorder[pr])
             {
-                return i;
+                index = i;
             }
         }
-        return -1;
+        return index;
     }
-
-    TreeNode *get(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
+    TreeNode *build(vector<int> &inorder, int il, int ir, vector<int> &postorder, int pl, int pr)
     {
         if (il > ir)
         {
             return nullptr;
         }
-        if (il == ir)
-        {
-            return new TreeNode(inorder[il]);
-        }
-        int index = findindex(inorder, il, ir, postorder, pl, pr);
+        int index = findd(inorder, il, ir, postorder, pl, pr);
         TreeNode *root = new TreeNode(inorder[index]);
-        int lenn = index - il;
-        root->left = get(inorder, il, index - 1, postorder, pl, pl + lenn - 1);
-        root->right = get(inorder, index + 1, ir, postorder, pl + lenn, pr - 1);
+        root->left = build(inorder, il, index - 1, postorder, pl, pl + index - il - 1);
+        root->right = build(inorder, index + 1, ir, postorder, pl + index - il, pr - 1);
         return root;
     }
-
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder)
     {
-        return get(inorder, 0, inorder.size() - 1, postorder, 0, postorder.size() - 1);
+        return build(inorder, 0, inorder.size() - 1, postorder, 0, postorder.size() - 1);
     }
 };
 // @lc code=end

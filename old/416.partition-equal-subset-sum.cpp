@@ -48,7 +48,7 @@ public:
                 dp[j] = dp[j - i] || dp[j];
             }
         }
-        return dp.back();
+        return dp[total];
     }
 };
 // @lc code=end

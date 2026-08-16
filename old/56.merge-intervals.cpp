@@ -29,22 +29,22 @@ class Solution
 public:
     vector<vector<int>> merge(vector<vector<int>> &intervals)
     {
-        vector<vector<int>> resu;
         sort(intervals.begin(), intervals.end(), [](auto &i, auto &j)
              {
             if(i[0]!=j[0]){
                 
                 return i[0]<j[0];
             }else{
-
                 return i[1]<j[1];
             } });
-        auto same = intervals[0];
+        vector<vector<int>>
+            resu;
+        vector<int> same = intervals[0];
         for (int i = 1; i < intervals.size(); i++)
         {
             if (intervals[i][0] <= same[1])
             {
-                same[1] = same[1] > intervals[i][1] ? same[1] : intervals[i][1];
+                same[1] = max(same[1], intervals[i][1]);
             }
             else
             {

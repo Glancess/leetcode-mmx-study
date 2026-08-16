@@ -29,21 +29,21 @@ class Solution
 public:
     int longestPalindromeSubseq(string s)
     {
-        int maxx = 0;
         vector<vector<int>> dp(s.size(), vector<int>(s.size(), 0));
-        for (int i = s.size() - 1; i > -1; i--)
+        int ans = 0;
+        for (int i = s.size() - 1; i >= 0; i--)
         {
             for (int j = i; j < s.size(); j++)
             {
                 if (s[i] == s[j])
                 {
-                    if (j - i == 0)
-                    {
-                        dp[i][j] = 1;
-                    }
-                    else if (j - i == 1)
+                    if (j - i == 1)
                     {
                         dp[i][j] = 2;
+                    }
+                    else if (j - i == 0)
+                    {
+                        dp[i][j] = 1;
                     }
                     else
                     {
@@ -54,10 +54,10 @@ public:
                 {
                     dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);
                 }
-                maxx = max(dp[i][j], maxx);
+                ans = max(ans, dp[i][j]);
             }
         }
-        return maxx;
+        return ans;
     }
 };
 // @lc code=end

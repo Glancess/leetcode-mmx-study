@@ -29,17 +29,17 @@ class Solution
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>> &prerequisites)
     {
-        vector<int> indegree(numCourses, 0);
+        vector<int> resu;
         vector<vector<int>> graph(numCourses);
+        vector<int> indegree(numCourses, 0);
+
         for (auto &i : prerequisites)
         {
-            int from = i[1];
-            int to = i[0];
-            graph[from].push_back(to);
-            indegree[to]++;
+            graph[i[1]].push_back(i[0]);
+            indegree[i[0]]++;
         }
+
         queue<int> qu;
-        vector<int> path;
         for (int i = 0; i < indegree.size(); i++)
         {
             if (indegree[i] == 0)
@@ -47,35 +47,33 @@ public:
                 qu.push(i);
             }
         }
+
         while (!qu.empty())
         {
             int t = qu.front();
+            resu.push_back(t);
             qu.pop();
-            path.push_back(t);
-            for (int &j : graph[t])
+            for (int &i : graph[t])
             {
-                indegree[j]--;
-                if (indegree[j] == 0)
+                indegree[i]--;
+                if (indegree[i] == 0)
                 {
-                    qu.push(j);
+                    qu.push(i);
                 }
             }
+            /* code */
         }
-        if (path.size() == numCourses)
-        {
-            return path;
-        }
-        else
-        {
+        if (resu.size() != numCourses)
             return {};
-        }
+
+        return resu;
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// 2\n[[1,0]]\n
+// 3\n[[1,0],[1,2],[0,1]]\n
 // @lcpr case=end
 
 // @lcpr case=start

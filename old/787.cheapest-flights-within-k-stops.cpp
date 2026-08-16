@@ -29,53 +29,21 @@ class Solution
 public:
     int findCheapestPrice(int n, vector<vector<int>> &flights, int src, int dst, int k)
     {
-        int n, m;
-        cin >> n >> m;
-        vector<vector<pair<int, int>>> graph(n + 1);
-        while (m > 0)
+        vector<int> Mindis(n, 1e9);
+        Mindis[src] = 0;
+        for (int i = 0; i <= k; i++)
         {
-            m--;
-            int a, b, c;
-            cin >> a >> b >> c;
-            graph[a].push_back({b, c});
-        }
-        queue<int> qu;
-        vector<bool> inqu(n + 1, false);
-        vector<int> Mindis(n + 1, 1e9);
-        vector<int> cnt(n + 1, 0);
-        Mindis[1] = 0;
-        qu.push(1);
-        cnt[1] = 1;
-        inqu[1] = true;
-        while (!qu.empty())
-        {
-            int t = qu.front();
-            qu.pop();
-            inqu[t] = false;
+            vector<int> t = Mindis;
 
-            for (auto &j : graph[t])
+            for (auto &k : flights)
             {
-                if (Mindis[j.first] > Mindis[t] + j.second)
+                if (t[k[0]] != 1e9)
                 {
-                    Mindis[j.first] = Mindis[t] + j.second;
-                    if (!inqu[j.first])
-                    {
-                        qu.push(j.first);
-                        cnt[j.first]++;
-                        inqu[j.first] = true;
-                        if (cnt[j.first] >= n)
-                        {
-                            cout << "circle";
-                            return 0;
-                        }
-                    }
+                    Mindis[k[1]] = min(Mindis[k[1]], t[k[0]] + k[2]);
                 }
             }
-            if (Mindis[n] == 1e9)
-                cout << "unconnected";
-            else
-                cout << Mindis[n];
         }
+        return Mindis[dst] == 1e9 ? -1 : Mindis[dst];
     }
 };
 // @lc code=end

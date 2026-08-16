@@ -30,26 +30,19 @@ public:
     int canCompleteCircuit(vector<int> &gas, vector<int> &cost)
     {
         int total = 0;
-        int shengyu = 0;
+        int cur = 0;
         int start = 0;
         for (int i = 0; i < cost.size(); i++)
         {
-            shengyu += (gas[i] - cost[i]);
-            total += (gas[i] - cost[i]);
-            if (shengyu < 0)
+            cur += (gas[i] - cost[i]);
+            total += gas[i] - cost[i];
+            if (cur < 0)
             {
                 start = i + 1;
-                shengyu = 0;
+                cur = 0;
             }
         }
-        if (total >= 0)
-        {
-            return start;
-        }
-        else
-        {
-            return -1;
-        }
+        return total < 0 ? -1 : start;
     }
 };
 // @lc code=end

@@ -45,7 +45,7 @@ public:
                 dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
             }
         }
-        return dp.back().back();
+        return dp[m - 1][n - 1];
     }
 };
 // @lc code=end

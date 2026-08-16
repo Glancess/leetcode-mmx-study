@@ -29,32 +29,33 @@ class Solution
 public:
     int DFS(vector<vector<int>> &grid, int x, int y)
     {
-        int m = grid.size();
-        int n = grid[0].size();
-        if (x >= m || y >= n || x < 0 || y < 0 || grid[x][y] == 0)
+        int n = grid.size();
+        int m = grid[0].size();
+        if (x >= n || y >= m || x < 0 || y < 0 || grid[x][y] == 0)
         {
             return 0;
         }
         grid[x][y] = 0;
-        return 1 + DFS(grid, x + 1, y) + DFS(grid, x, y - 1) + DFS(grid, x - 1, y) + DFS(grid, x, y + 1);
+        return 1 + DFS(grid, x + 1, y) + DFS(grid, x - 1, y) + DFS(grid, x, y + 1) + DFS(grid, x, y - 1);
     }
 
     int maxAreaOfIsland(vector<vector<int>> &grid)
     {
-        int maxarea = 0;
-        int m = grid.size();
-        int n = grid[0].size();
-        for (int i = 0; i < m; i++)
+        int resu = 0;
+        int n = grid.size();
+        int m = grid[0].size();
+        for (int i = 0; i < n; i++)
         {
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < m; j++)
             {
                 if (grid[i][j])
                 {
-                    maxarea = max(maxarea, DFS(grid, i, j));
+                    int area = DFS(grid, i, j);
+                    resu = max(resu, area);
                 }
             }
         }
-        return maxarea;
+        return resu;
     }
 };
 // @lc code=end

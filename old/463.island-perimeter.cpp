@@ -29,35 +29,35 @@ class Solution
 public:
     int islandPerimeter(vector<vector<int>> &grid)
     {
-        int zhouchang = 0;
+        vector<pair<int, int>> dr = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        int result = 0;
         int n = grid.size();
         int m = grid[0].size();
-        vector<pair<int, int>> dr = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < m; j++)
             {
-                if (grid[i][j] == 1)
+                if (grid[i][j])
                 {
-                    int t = 4;
+                    int zhouzhang = 4;
                     for (auto &k : dr)
                     {
-                        int nx = k.first + i;
-                        int ny = k.second + j;
+                        int nx = i + k.first;
+                        int ny = j + k.second;
                         if (nx >= n || ny >= m || nx < 0 || ny < 0)
                         {
                             continue;
                         }
-                        if (grid[nx][ny] == 1)
+                        if (grid[nx][ny])
                         {
-                            t--;
+                            zhouzhang--;
                         }
                     }
-                    zhouchang += t;
+                    result += zhouzhang;
                 }
             }
         }
-        return zhouchang;
+        return result;
     }
 };
 // @lc code=end

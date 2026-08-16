@@ -29,7 +29,7 @@ class Solution
 public:
     int findTargetSumWays(vector<int> &nums, int target)
     {
-
+        // 分为两堆,A+B=sum,A-B=tar
         int sum = 0;
         for (int &i : nums)
         {
@@ -50,9 +50,9 @@ public:
         {
             if (i == 0)
             {
-                for (int j = 0; j < total + 1; j++)
+                for (int &j : dp)
                 {
-                    dp[j] *= 2;
+                    j *= 2;
                 }
             }
             else

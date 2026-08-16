@@ -27,17 +27,10 @@ using namespace std;
 class Solution
 {
 public:
-    typedef struct edge
-    {
-        /* data */
-        int from;
-        int to;
-        int distance;
-    };
+    // MST
     typedef struct Unionfind
     {
         vector<int> father;
-
         Unionfind(int n)
         {
             father.resize(n + 1);
@@ -45,7 +38,7 @@ public:
             {
                 father[i] = i;
             }
-        } /* data */
+        }
         int find(int a)
         {
             if (a == father[a])
@@ -66,52 +59,26 @@ public:
             {
                 return;
             }
-            else
-            {
-                father[a] = b;
-            }
+            father[a] = b;
         }
+
+        /* data */
     };
 
     int minCostConnectPoints(vector<vector<int>> &points)
     {
-        int n = points.size();
-        int res = 0;
-
-        vector<bool> visited(n, false);
-
-        vector<int> minDist(n, INT_MAX);
-
-        minDist[0] = 0;
-
-        for (int i = 0; i < n; i++)
+        vector<int> Mindis(points.size(), 1e9);
+        vector<bool> Visited(points.size(), false);
+        Mindis[0] = 0;
+        for (int i = 0; i < points.size(); i++)
         {
-            int cur = -1;
-            int minVal = INT_MAX;
-
-            // 找距离树最近的点
-            for (int j = 0; j < n; j++)
+            int Minindex = -1;
+            int Minn = 1e9;
+            for (int j = 0; j < points.size(); j++)
             {
-                if (!visited[j] && minDist[j] < minVal)
-                {
-                    minVal = minDist[j];
-                    cur = j;
-                }
-            }
-            // 加入树
-            visited[cur] = true;
-            res += minVal;
-
-            for (int j = 0; j < n; j++)
-            {
-                if (!visited[j])
-                {
-                    int dis = abs(points[j][0] - points[cur][0]) + abs(points[j][1] - points[cur][1]);
-                    minDist[j] = min(minDist[j], dis);
-                }
+                if ()
             }
         }
-        return res;
     }
 };
 // @lc code=end

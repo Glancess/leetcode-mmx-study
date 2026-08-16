@@ -39,27 +39,30 @@ class Solution
 {
 public:
     TreeNode *pre = nullptr;
-
+    bool tag = true;
+    void is(TreeNode *root)
+    {
+        if (!root)
+        {
+            return;
+        }
+        is(root->left);
+        if (pre && pre->val >= root->val)
+        {
+            tag = false;
+            return;
+        }
+        pre = root;
+        is(root->right);
+    }
     bool isValidBST(TreeNode *root)
     {
         if (!root)
         {
             return true;
         }
-        if (!isValidBST(root->left))
-        {
-            return false;
-        }
-        if (pre && pre->val >= root->val)
-        {
-            return false;
-        }
-        pre = root;
-        if (!isValidBST(root->right))
-        {
-            return false;
-        }
-        return true;
+        is(root);
+        return tag;
     }
 };
 // @lc code=end

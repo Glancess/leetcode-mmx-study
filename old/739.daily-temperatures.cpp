@@ -31,10 +31,9 @@ public:
     {
         vector<int> resu(temperatures.size(), 0);
         stack<int> st;
-
         for (int i = 0; i < temperatures.size(); i++)
         {
-            while (!st.empty() && temperatures[i] > temperatures[st.top()])
+            while (!st.empty() && temperatures[st.top()] < temperatures[i])
             {
                 resu[st.top()] = i - st.top();
                 st.pop();

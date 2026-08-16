@@ -43,7 +43,7 @@ public:
                 dp[j] = min(dp[j], dp[j - i] + 1);
             }
         }
-        return dp.back();
+        return dp[n];
     }
 };
 // @lc code=end
