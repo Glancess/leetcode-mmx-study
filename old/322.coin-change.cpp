@@ -33,9 +33,9 @@ public:
         dp[0] = 0;
         for (int &i : coins)
         {
-            for (int j = i; j < amount + 1; j++)
+            for (int j = i; j <= amount; j++)
             {
-                dp[j] = min(dp[j - i] + 1, dp[j]);
+                dp[j] = min(dp[j], dp[j - i] + 1);
             }
         }
         return dp.back() == 1e9 ? -1 : dp.back();

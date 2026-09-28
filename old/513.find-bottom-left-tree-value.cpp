@@ -38,31 +38,26 @@ using namespace std;
 class Solution
 {
 public:
-    int result = -1;
-    int maxDepth = -1;
+    int maxdepth = -1;
+    int maxx = -1;
     void get(TreeNode *root, int depth)
     {
-        if (root == nullptr)
-            return;
-
-        // 到达叶子
-        if (!root->left && !root->right)
+        if (!root)
         {
-            if (depth > maxDepth)
-            {
-                maxDepth = depth;
-                result = root->val;
-            }
+            return;
         }
-
+        if (depth > maxdepth)
+        {
+            maxx = root->val;
+            maxdepth = depth;
+        }
         get(root->left, depth + 1);
-
         get(root->right, depth + 1);
     }
     int findBottomLeftValue(TreeNode *root)
     {
         get(root, 1);
-        return result;
+        return maxx;
     }
 };
 // @lc code=end

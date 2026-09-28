@@ -36,9 +36,9 @@ public:
 
             if (nums[i] > nums[i - 1])
             {
-                dp[i] = dp[i - 1] + 1;
+                dp[i] = max(dp[i], dp[i - 1] + 1);
+                maxx = max(dp[i], maxx);
             }
-            maxx = max(maxx, dp[i]);
         }
         return maxx;
     }

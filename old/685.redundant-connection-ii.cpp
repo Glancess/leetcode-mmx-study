@@ -27,51 +27,102 @@ using namespace std;
 class Solution
 {
 public:
+    struct Unionfind
+    {
+        vector<int> father;
+        Unionfind(int n)
+        {
+            father.resize(n + 1);
+            for (int i = 0; i < n + 1; i++)
+            {
+                father[i] = i;
+            }
+        }
+        bool issame(int a, int b)
+        {
+            return find(a) == find(b);
+        }
+        int find(int a)
+        {
+            if (father[a] == a)
+            {
+                return a;
+            }
+            return father[a] = find(father[a]);
+        }
+        void join(int a, int b)
+        {
+            a = find(a);
+            b = find(b);
+            if (a != b)
+            {
+                father[a] = b;
+            }
+        }
+        /* data */
+    };
+
     vector<int> findRedundantDirectedConnection(vector<vector<int>> &edges)
     {
-
-        int n, m;
-        cin >> n >> m;
-        vector<vector<pair<int, int>>> graph(n + 1);
-        vector<vector<int>> dp(n + 1, vector<int>(n + 1, 1e9));
-        for (int i = 1; i <= n; i++)
+        vector<int> indegree(edges.size() + 1, 0);
+        // cha ru du wei 2 de
+        for (auto &i : edges)
         {
-            dp[i][i] = 0;
+            indegree[i[1]]++;
         }
-        while (m > 0)
+        vector<int> edge1, edge2;
+        for (auto &i : edges)
         {
-            m--;
-            int a, b, c;
-            cin >> a >> b >> c;
-            graph[a].push_back({b, c});
-            dp[a][b] = c;
-            dp[b][a] = c;
-        }
-        for (int k = 1; k < n + 1; k++)
-        {
-            // k作为中转节点
-            for (int i = 1; i < n + 1; i++)
+            if (indegree[i[1]] == 2)
             {
-                for (int j = 1; j < n + 1; j++)
+                if (!edge1.empty())
                 {
-                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
+                    edge2 = i;
+                }
+                else
+                {
+                    edge1 = i;
                 }
             }
         }
-        int x;
-        cin >> x;
-        while (x > 0)
+        vector<int> resu;
+        if (edge2.empty())
         {
-            x--;
-            int a, b;
-            cin >> a >> b;
-            if (dp[a][b] == 1e9)
+            Unionfind uni2(edges.size());
+            for (auto &i : edges)
             {
-                cout << -1 << "\n";
+                if (uni2.issame(i[0], i[1]))
+                {
+                    resu = i;
+                }
+                else
+                {
+                    uni2.join(i[0], i[1]);
+                }
             }
-            else
-                cout << dp[a][b] << "\n";
         }
+        else
+        {
+
+            resu = edge2;
+            Unionfind uni1(edges.size());
+            for (auto &i : edges)
+            {
+                if (i == edge2)
+                {
+                    continue;
+                }
+                if (uni1.issame(i[0], i[1]))
+                {
+                    resu = edge1;
+                }
+                else
+                {
+                    uni1.join(i[0], i[1]);
+                }
+            }
+        }
+        return resu;
     }
 };
 // @lc code=end

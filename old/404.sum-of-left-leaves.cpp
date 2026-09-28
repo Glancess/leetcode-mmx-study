@@ -48,7 +48,7 @@ public:
         if (root->left && !root->left->left && !root->left->right)
         {
             sum += root->left->val;
-        }
+                }
         get(root->left);
         get(root->right);
     }

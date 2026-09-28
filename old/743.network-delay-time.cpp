@@ -29,49 +29,50 @@ class Solution
 public:
     int networkDelayTime(vector<vector<int>> &times, int n, int k)
     {
-        // bell-man ford--upgrade
-
-        // i need edges
-        vector<vector<vector<int>>> edges(n + 1);
+        vector<vector<pair<int, int>>> edge(n + 1);
         for (auto &i : times)
         {
-            edges[i[0]].push_back({i[1], i[2]});
+            edge[i[0]].push_back({i[1], i[2]});
         }
         vector<int> Mindis(n + 1, 1e9);
         Mindis[k] = 0;
-        queue<int> qu;
-        qu.push(k);
-        vector<bool> inque(n + 1, false);
-        inque[k] = true;
-        while (!qu.empty())
+        vector<bool> visited(n + 1, false);
+        for (int i = 1; i <= n; i++)
         {
-            int t = qu.front();
-            inque[t] = false;
-            qu.pop();
-            for (auto &i : edges[t])
+            int Mindistance = 1e9;
+            int Minindex = -1;
+            for (int j = 1; j <= n; j++)
             {
-                if (Mindis[i[0]] > Mindis[t] + i[1])
+                if (!visited[j] && Mindistance > Mindis[j])
                 {
-                    Mindis[i[0]] = Mindis[t] + i[1];
-                    if (!inque[i[0]])
-                    {
+                    Mindistance = Mindis[j];
+                    Minindex = j;
+                }
+            }
+            if (Minindex == -1)
+            {
+                break;
+            }
+            // biao ji
+            visited[Minindex] = true;
+            // kai shi song chi
 
-                        qu.push(i[0]);
-                        inque[i[0]] = true;
-                    }
+            for (auto &k : edge[Minindex])
+            {
+                if (!visited[k.first] && Mindis[k.first] > Mindis[Minindex] + k.second)
+                {
+                    Mindis[k.first] = Mindis[Minindex] + k.second;
                 }
             }
         }
-        int resu = 0;
-        for (int i = 1; i < n + 1; i++)
+        int ans = *max_element(Mindis.begin() + 1, Mindis.end());
+
+        if (ans == 1e9)
         {
-            if (Mindis[i] == 1e9)
-            {
-                return -1;
-            }
-            resu = max(Mindis[i], resu);
+            return -1;
         }
-        return resu;
+
+        return ans;
     }
 };
 // @lc code=end

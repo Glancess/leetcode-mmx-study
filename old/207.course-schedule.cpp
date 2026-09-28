@@ -29,7 +29,7 @@ class Solution
 public:
     bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
     {
-        vector<int> indegree(numCourses, 0);
+        vector<int> indegree(numCourses);
         vector<vector<int>> edge(numCourses);
         for (auto &i : prerequisites)
         {
@@ -37,7 +37,7 @@ public:
             indegree[i[0]]++;
         }
         queue<int> qu;
-        for (int i = 0; i < numCourses; i++)
+        for (int i = 0; i < indegree.size(); i++)
         {
             if (indegree[i] == 0)
             {

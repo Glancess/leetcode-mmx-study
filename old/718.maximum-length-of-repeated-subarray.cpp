@@ -29,8 +29,7 @@ class Solution
 public:
     int findLength(vector<int> &nums1, vector<int> &nums2)
     {
-
-        int ans = 0;
+        int maxx = 0;
         vector<vector<int>> dp(nums1.size() + 1, vector<int>(nums2.size() + 1, 0));
         for (int i = 1; i < nums1.size() + 1; i++)
         {
@@ -39,15 +38,15 @@ public:
                 if (nums1[i - 1] == nums2[j - 1])
                 {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
-                    ans = max(ans, dp[i][j]);
                 }
                 else
                 {
                     dp[i][j] = 0;
                 }
+                maxx = max(dp[i][j], maxx);
             }
         }
-        return ans;
+        return maxx;
     }
 };
 // @lc code=end

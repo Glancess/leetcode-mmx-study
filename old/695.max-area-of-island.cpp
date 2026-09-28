@@ -27,31 +27,16 @@ using namespace std;
 class Solution
 {
 public:
-    int DFS(vector<vector<int>> &grid, int x, int y)
-    {
-        int n = grid.size();
-        int m = grid[0].size();
-        if (x >= n || y >= m || x < 0 || y < 0 || grid[x][y] == 0)
-        {
-            return 0;
-        }
-        grid[x][y] = 0;
-        return 1 + DFS(grid, x + 1, y) + DFS(grid, x - 1, y) + DFS(grid, x, y + 1) + DFS(grid, x, y - 1);
-    }
-
-    int maxAreaOfIsland(vector<vector<int>> &grid)
+       int maxAreaOfIsland(vector<vector<int>> &grid)
     {
         int resu = 0;
-        int n = grid.size();
-        int m = grid[0].size();
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < grid.size(); i++)
         {
-            for (int j = 0; j < m; j++)
+            for (int j = 0; j < grid[0].size(); j++)
             {
-                if (grid[i][j])
+                if (grid[i][j] == 1)
                 {
-                    int area = DFS(grid, i, j);
-                    resu = max(resu, area);
+                    resu = max(resu, DFS(grid, i, j));
                 }
             }
         }

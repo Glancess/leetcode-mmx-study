@@ -44,16 +44,18 @@ public:
         {
             return {0, 0};
         }
-        auto i = robb(root->left);
-        auto j = robb(root->right);
+        auto left = robb(root->left);
+        auto right = robb(root->right);
         return {
-            root->val + i[1] + j[1],
-            max(i[0], i[1]) + max(j[0], j[1])};
+            // zuotou you butou
+            root->val + left[1] + right[1], max(left[0], left[1]) + max(right[0], right[1])};
     }
 
     int rob(TreeNode *root)
     {
-        return max(robb(root)[0], robb(root)[1]);
+
+        auto res = robb(root);
+        return max(res[0], res[1]);
     }
 };
 // @lc code=end

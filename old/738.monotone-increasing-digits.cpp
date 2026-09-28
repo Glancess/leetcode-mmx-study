@@ -32,19 +32,26 @@ public:
         string t = to_string(n);
         for (int i = 0; i < t.size() - 1; i++)
         {
-            if (t[i] > t[i + 1])
+            int a = t[i] - '0';
+            int b = t[i + 1] - '0';
+            if (a > b)
             {
-                // 已经找到不符合的位置
-                t[i] -= 1;
-                while (i >= 1 && t[i] < t[i - 1])
+                t[i]--;
+                while (i > 0)
                 {
-                    i--;
-                    t[i] -= 1;
+                    if (t[i] - '0' < t[i - 1] - '0')
+                    {
+                        i--;
+                        t[i]--;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-
-                for (int j = i + 1; j < t.size(); j++)
+                for (int k = i + 1; k < t.size(); k++)
                 {
-                    t[j] = '9';
+                    t[k] = '9';
                 }
             }
         }

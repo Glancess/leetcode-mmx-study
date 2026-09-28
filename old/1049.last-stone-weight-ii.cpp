@@ -30,20 +30,20 @@ public:
     int lastStoneWeightII(vector<int> &stones)
     {
         int sum = 0;
-        for (int &i : stones)
+        for (auto &i : stones)
         {
             sum += i;
         }
         int total = sum / 2;
         vector<int> dp(total + 1, 0);
-        for (int &i : stones)
+        for (auto &i : stones)
         {
             for (int j = total; j >= i; j--)
             {
                 dp[j] = max(dp[j - i] + i, dp[j]);
             }
         }
-        return sum - 2 * dp.back();
+        return (sum - 2 * dp.back());
     }
 };
 // @lc code=end

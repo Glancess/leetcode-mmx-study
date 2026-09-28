@@ -27,37 +27,34 @@ using namespace std;
 class Solution
 {
 public:
+    vector<vector<int>> dr = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     void DFS(vector<vector<char>> &grid, int x, int y)
     {
-        int m = grid.size();
-        int n = grid[0].size();
-        if (x >= m || y >= n || x < 0 || y < 0 || grid[x][y] == '0')
+        if (x >= grid.size() || y >= grid[0].size() || x < 0 || y < 0 || grid[x][y] == '0')
         {
             return;
         }
         grid[x][y] = '0';
-        DFS(grid, x + 1, y);
-        DFS(grid, x - 1, y);
-        DFS(grid, x, y + 1);
         DFS(grid, x, y - 1);
+        DFS(grid, x, y + 1);
+        DFS(grid, x - 1, y);
+        DFS(grid, x + 1, y);
     }
     int numIslands(vector<vector<char>> &grid)
     {
-        int ans = 0;
-        int m = grid.size();
-        int n = grid[0].size();
-        for (int i = 0; i < m; i++)
+        int count = 0;
+        for (int i = 0; i < grid.size(); i++)
         {
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < grid[0].size(); j++)
             {
                 if (grid[i][j] == '1')
                 {
-                    ans++;
+                    count++;
                     DFS(grid, i, j);
                 }
             }
         }
-        return ans;
+        return count;
     }
 };
 // @lc code=end

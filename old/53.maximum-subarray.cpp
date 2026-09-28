@@ -29,19 +29,20 @@ class Solution
 public:
     int maxSubArray(vector<int> &nums)
     {
-        int cursum = nums[0];
-        int maxx = cursum;
+        // tanxin
+        int cur = nums[0];
+        int maxx = cur;
         for (int i = 1; i < nums.size(); i++)
         {
-            if (cursum < 0)
+            if (cur < 0)
             {
-                cursum = nums[i];
+                cur = nums[i];
             }
             else
             {
-                cursum += nums[i];
+                cur += nums[i];
             }
-            maxx = max(maxx, cursum);
+            maxx = max(cur, maxx);
         }
         return maxx;
     }

@@ -29,51 +29,56 @@ class Solution
 public:
     int ladderLength(string beginWord, string endWord, vector<string> &wordList)
     {
-        unordered_set<string> st(wordList.begin(), wordList.end());
-        if (st.count(endWord) == 0)
+        unordered_set<string> se(wordList.begin(), wordList.end());
+        if (se.count(endWord) == 0)
         {
             return 0;
         }
         queue<string> qu;
-        qu.push(beginWord);
         int step = 1;
+        qu.push(beginWord);
         while (!qu.empty())
         {
+
             int size = qu.size();
-            step++;
             while (size > 0)
             {
                 size--;
                 string t = qu.front();
                 qu.pop();
+                if (t == endWord)
+                {
+                    return step;
+                }
 
                 for (int i = 0; i < t.size(); i++)
                 {
+                    string tt = t;
                     for (char k = 'a'; k <= 'z'; k++)
                     {
-
-                        string tt = t;
-                        if (k == tt[i])
+                        if (tt[i] == k)
                         {
                             continue;
                         }
-                        tt[i] = k;
-                        if (tt == endWord)
+                        else
                         {
-                            return step;
+                            tt[i] = k;
+                            if (se.find(tt) != se.end())
+                            {
+                                qu.push(tt);
+                                se.erase(tt);
+                            }
                         }
-                        if (st.count(tt) != 0)
-                        {
-                            st.erase(tt);
-                            qu.push(tt);
-                                                }
                     }
                 }
             }
-        }
+            step++;
+                }
         return 0;
     }
-};
+}
+
+;
 // @lc code=end
 
 /*

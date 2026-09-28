@@ -31,29 +31,28 @@ public:
     {
         sort(intervals.begin(), intervals.end(), [](auto &i, auto &j)
              {
-            if(i[0]!=j[0]){
-                return i[0]<j[0];
-            }else{
-                return i[1]<j[1];
-            } });
-        int count = 0;
+                 if (i[0] != j[0])
+                 {
+                    return i[0]<j[0];
+                 }else{
+
+                    return i[1]<j[1];
+                 } });
         auto same = intervals[0];
+        int result = 0;
         for (int i = 1; i < intervals.size(); i++)
         {
             if (intervals[i][0] < same[1])
             {
-                count++;
-                if (intervals[i][1] < same[1])
-                {
-                    same = intervals[i];
-                }
+                result++;
+                same = intervals[i][1] > same[1] ? same : intervals[i];
             }
             else
             {
                 same = intervals[i];
             }
         }
-        return count;
+        return result;
     }
 };
 // @lc code=end

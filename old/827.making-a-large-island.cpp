@@ -27,7 +27,7 @@ using namespace std;
 class Solution
 {
 public:
-    int DFS(vector<vector<int>> &grid, int target, int x, int y)
+    int DFS(int target, vector<vector<int>> &grid, int x, int y)
     {
         int n = grid.size();
         int m = grid[0].size();
@@ -36,27 +36,29 @@ public:
             return 0;
         }
         grid[x][y] = target;
-        return 1 + DFS(grid, target, x + 1, y) + DFS(grid, target, x - 1, y) + DFS(grid, target, x, y + 1) + DFS(grid, target, x, y - 1);
+        return 1 + DFS(target, grid, x + 1, y) + DFS(target, grid, x - 1, y) + DFS(target, grid, x, y + 1) + DFS(target, grid, x, y - 1);
     }
+
     int largestIsland(vector<vector<int>> &grid)
     {
+        unordered_map<int, int> mp;
+
         int n = grid.size();
         int m = grid[0].size();
         int target = 2;
-        unordered_map<int, int> mp;
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < m; j++)
             {
                 if (grid[i][j] == 1)
                 {
-                    mp[target] = DFS(grid, target, i, j);
+                    mp[target] = DFS(target, grid, i, j);
                     target++;
                 }
             }
         }
-        int resu = 0;
-        vector<pair<int, int>> dr = {{1, 0}, {-1, 0}, {0, -1}, {0, 1}};
+        int maxre = 0;
+        vector<pair<int, int>> dr = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < m; j++)
@@ -68,22 +70,22 @@ public:
                     {
                         int nx = i + k.first;
                         int ny = j + k.second;
-                        if (nx >= n || ny >= m || nx < 0 || ny < 0 || grid[nx][ny] == 0)
+                        if (nx >= n || ny >= m || nx < 0 || ny < 0)
                         {
                             continue;
                         }
                         st.insert(grid[nx][ny]);
                     }
-                    int sum = 1;
+                    int area = 1;
                     for (auto &l : st)
                     {
-                        sum += mp[l];
+                        area += mp[l];
                     }
-                    resu = max(resu, sum);
+                    maxre = max(maxre, area);
                 }
             }
         }
-        return resu == 0 ? n * m : resu;
+        return maxre == 0 ? m * n : maxre;
     }
 };
 // @lc code=end

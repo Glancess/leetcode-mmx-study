@@ -36,7 +36,7 @@ public:
         }
         vector<int> dp(n + 1, 1e9);
         dp[0] = 0;
-        for (int &i : bag)
+        for (auto &i : bag)
         {
             for (int j = i; j < n + 1; j++)
             {

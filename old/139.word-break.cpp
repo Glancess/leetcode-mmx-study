@@ -33,7 +33,7 @@ public:
         dp[0] = true;
         for (int i = 1; i < s.size() + 1; i++)
         {
-            for (string &j : wordDict)
+            for (auto &j : wordDict)
             {
                 if (i >= j.size() && dp[i - j.size()] && s.substr(i - j.size(), j.size()) == j)
                 {

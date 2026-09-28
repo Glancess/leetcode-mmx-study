@@ -38,36 +38,45 @@ using namespace std;
 class Solution
 {
 public:
-    int sum = 0;
-    // 2表示覆盖了，1表示有摄像头。0表示啥都没
+    int ant = 0;
+    // 1 biaoshi fangshexiangtou,0meibeijiankong,2biaoshibeijiankong
     int get(TreeNode *root)
     {
         if (!root)
         {
             return 2;
         }
-        int left = get(root->left);
-        int right = get(root->right);
-        if (left == 2 && right == 2)
+        int l = get(root->left);
+        int r = get(root->right);
+        if (l == 0 || r == 0)
+        {
+            ant++;
+            return 1;
+        }
+        else if (l == 1 || r == 1)
+        {
+
+            return 2;
+        }
+        else if (l == 2 && r == 2)
         {
             return 0;
         }
-        if (!left || !right)
+        else
         {
-            sum++;
-            return 1;
+            return 2;
         }
-        return 2;
     }
     int minCameraCover(TreeNode *root)
     {
-        if (!get(root))
+        ant = 0;
+
+        if (get(root) == 0)
         {
-            sum++;
-            return sum;
+            ant++;
         }
-        else
-            return sum;
+
+        return ant;
     }
 };
 // @lc code=end

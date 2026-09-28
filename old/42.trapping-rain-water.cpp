@@ -29,21 +29,21 @@ class Solution
 public:
     int trap(vector<int> &height)
     {
-        int ans = 0;
         stack<int> st;
+        int ans = 0;
         for (int i = 0; i < height.size(); i++)
         {
-            while (!st.empty() && height[st.top()] < height[i])
+            while (!st.empty() && height[i] > height[st.top()])
             {
                 int t = st.top();
                 st.pop();
                 if (st.empty())
                 {
-                    break;
+                    continue;
                 }
-                int high = min(height[i], height[st.top()]) - height[t];
+                int high = min(height[st.top()], height[i]);
                 int wide = i - st.top() - 1;
-                ans += high * wide;
+                ans += (high - height[t]) * wide;
             }
             st.push(i);
         }

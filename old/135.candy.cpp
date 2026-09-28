@@ -30,19 +30,18 @@ public:
     int candy(vector<int> &ratings)
     {
         vector<int> candy(ratings.size(), 1);
-        for (int i = 1; i < ratings.size(); i++)
+        for (int i = 0; i < ratings.size() - 1; i++)
         {
-            if (ratings[i] > ratings[i - 1])
+            if (ratings[i] < ratings[i + 1])
             {
-                candy[i] = candy[i - 1] + 1;
+                candy[i + 1] = candy[i] + 1;
             }
         }
-
-        for (int j = ratings.size() - 2; j > -1; j--)
+        for (int i = ratings.size() - 2; i >= 0; i--)
         {
-            if (ratings[j] > ratings[j + 1])
+            if (ratings[i] > ratings[i + 1])
             {
-                candy[j] = max(candy[j], candy[j + 1] + 1);
+                candy[i] = max(candy[i + 1] + 1, candy[i]);
             }
         }
         int sum = 0;

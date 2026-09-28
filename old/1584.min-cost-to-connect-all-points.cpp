@@ -27,8 +27,7 @@ using namespace std;
 class Solution
 {
 public:
-    // MST
-    typedef struct Unionfind
+    struct Unionfind
     {
         vector<int> father;
         Unionfind(int n)
@@ -41,7 +40,7 @@ public:
         }
         int find(int a)
         {
-            if (a == father[a])
+            if (father[a] == a)
             {
                 return a;
             }
@@ -55,30 +54,50 @@ public:
         {
             a = find(a);
             b = find(b);
-            if (a == b)
-            {
-                return;
-            }
-            father[a] = b;
+            if (a != b)
+                father[a] = b;
         }
-
         /* data */
     };
 
     int minCostConnectPoints(vector<vector<int>> &points)
     {
-        vector<int> Mindis(points.size(), 1e9);
-        vector<bool> Visited(points.size(), false);
+        // 最小生成树
+        int n = points.size();
+        vector<int> Mindis(n, 1e9);
         Mindis[0] = 0;
-        for (int i = 0; i < points.size(); i++)
+        int waste = 0;
+        vector<bool> visited(n, false);
+        for (int i = 0; i < n; i++)
         {
             int Minindex = -1;
-            int Minn = 1e9;
-            for (int j = 0; j < points.size(); j++)
+            int Mind = 1e9;
+            for (int i = 0; i < Mindis.size(); i++)
             {
-                if ()
+                if (!visited[i] && Mind > Mindis[i])
+                {
+                    Minindex = i;
+                    Mind = Mindis[i];
+                }
+            }
+            visited[Minindex] = true;
+            for (int j = 0; j < n; j++)
+            {
+                if (!visited[j])
+                {
+                    int dis =
+                        abs(points[Minindex][0] - points[j][0]) +
+                        abs(points[Minindex][1] - points[j][1]);
+
+                    Mindis[j] = min(Mindis[j], dis);
+                }
             }
         }
+        for (int &i : Mindis)
+        {
+            waste += i;
+        }
+        return waste;
     }
 };
 // @lc code=end

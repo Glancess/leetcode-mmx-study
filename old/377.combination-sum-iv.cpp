@@ -29,11 +29,13 @@ class Solution
 public:
     int combinationSum4(vector<int> &nums, int target)
     {
+        // wan quan bei bao
         vector<unsigned long long> dp(target + 1, 0);
         dp[0] = 1;
+
         for (int j = 1; j < target + 1; j++)
         {
-            for (int &i : nums)
+            for (auto &i : nums)
             {
                 if (j >= i)
                 {

@@ -30,25 +30,30 @@ public:
     int jump(vector<int> &nums)
     {
         if (nums.size() == 1)
-        {
             return 0;
-        }
+
         int far = 0;
+        int cur = 0;
         int step = 0;
-        int maxx = far;
-        for (int i = 0; i <= far; i++)
+
+        for (int i = 0; i < nums.size() - 1; i++)
         {
-            far = max(far, i + nums[i]);
-            if (i == maxx)
+            // 当前范围内不断寻找下一跳最远能到哪里
+            far = max(far, nums[i] + i);
+
+            // 当前这一步的范围已经考察完了
+            if (i == cur)
             {
                 step++;
-                maxx = far;
-            }
-            if (maxx >= nums.size() - 1)
-            {
-                return step;
+                cur = far;
+
+                if (cur >= nums.size() - 1)
+                {
+                    return step;
+                }
             }
         }
+
         return step;
     }
 };

@@ -29,21 +29,23 @@ class Solution
 public:
     int findCheapestPrice(int n, vector<vector<int>> &flights, int src, int dst, int k)
     {
-        vector<int> Mindis(n, 1e9);
-        Mindis[src] = 0;
+        vector<int> dist(n, 1e9);
+        dist[src] = 0;
         for (int i = 0; i <= k; i++)
         {
-            vector<int> t = Mindis;
-
+            auto t = dist;
             for (auto &k : flights)
             {
                 if (t[k[0]] != 1e9)
                 {
-                    Mindis[k[1]] = min(Mindis[k[1]], t[k[0]] + k[2]);
+                    if (dist[k[1]] > t[k[0]] + k[2])
+                    {
+                        dist[k[1]] = t[k[0]] + k[2];
+                    }
                 }
             }
         }
-        return Mindis[dst] == 1e9 ? -1 : Mindis[dst];
+        return dist[dst] == 1e9 ? -1 : dist[dst];
     }
 };
 // @lc code=end

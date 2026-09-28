@@ -30,8 +30,8 @@ public:
     int largestRectangleArea(vector<int> &heights)
     {
         int resu = 0;
+        stack<int> st;
         heights.push_back(0);
-        stack<int> st; // 单调增
         for (int i = 0; i < heights.size(); i++)
         {
             while (!st.empty() && heights[st.top()] > heights[i])
@@ -39,7 +39,8 @@ public:
                 int t = st.top();
                 st.pop();
                 int left = st.empty() ? -1 : st.top();
-                resu = max(resu, heights[t] * (i - left - 1));
+                int wide = i - left - 1;
+                resu = max(resu, wide * heights[t]);
             }
             st.push(i);
         }

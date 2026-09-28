@@ -28,24 +28,27 @@ class Solution
 {
 public:
     vector<vector<int>> resu;
-    void DFS(vector<vector<int>> &graph, int node, vector<int> path)
+    void DFS(vector<int> path, vector<vector<int>> &graph, int start)
     {
-        path.push_back(node);
-        if (node == graph.size() - 1)
+        if (start == graph.size() - 1)
         {
+            path.push_back(start);
             resu.push_back(path);
             return;
         }
-        for (int &i : graph[node])
+
+        for (auto &i : graph[start])
         {
-            DFS(graph, i, path);
+            path.push_back(start);
+            DFS(path, graph, i);
+            path.pop_back();
         }
     }
 
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>> &graph)
     {
-
-        DFS(graph, 0, {});
+        vector<int> path;
+        DFS(path, graph, 0);
         return resu;
     }
 };

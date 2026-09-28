@@ -29,16 +29,13 @@ class Solution
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>> &prerequisites)
     {
-        vector<int> resu;
-        vector<vector<int>> graph(numCourses);
         vector<int> indegree(numCourses, 0);
-
+        vector<vector<int>> edge(numCourses);
         for (auto &i : prerequisites)
         {
-            graph[i[1]].push_back(i[0]);
+            edge[i[1]].push_back(i[0]);
             indegree[i[0]]++;
         }
-
         queue<int> qu;
         for (int i = 0; i < indegree.size(); i++)
         {
@@ -47,13 +44,13 @@ public:
                 qu.push(i);
             }
         }
-
+        vector<int> resu;
         while (!qu.empty())
         {
             int t = qu.front();
-            resu.push_back(t);
             qu.pop();
-            for (int &i : graph[t])
+            resu.push_back(t);
+            for (auto &i : edge[t])
             {
                 indegree[i]--;
                 if (indegree[i] == 0)
@@ -61,19 +58,20 @@ public:
                     qu.push(i);
                 }
             }
-            /* code */
         }
-        if (resu.size() != numCourses)
+        if (resu.size() == numCourses)
+            return resu;
+        else
+        {
             return {};
-
-        return resu;
+        }
     }
 };
 // @lc code=end
 
 /*
 // @lcpr case=start
-// 3\n[[1,0],[1,2],[0,1]]\n
+// 2\n[[1,0]]\n
 // @lcpr case=end
 
 // @lcpr case=start

@@ -30,8 +30,7 @@ public:
     int numDistinct(string s, string t)
     {
         vector<vector<unsigned long long>> dp(s.size() + 1, vector<unsigned long long>(t.size() + 1, 0));
-
-        for (int i = 0; i <= s.size(); i++)
+        for (int i = 0; i < s.size() + 1; i++)
         {
             dp[i][0] = 1;
         }

@@ -29,14 +29,18 @@ class Solution
 public:
     bool isSubsequence(string s, string t)
     {
-        vector<vector<int>> dp(s.size() + 1, vector<int>(t.size() + 1, 0));
+        vector<vector<bool>> dp(s.size() + 1, vector<bool>(t.size() + 1, false));
+        for (int i = 0; i < t.size() + 1; i++)
+        {
+            dp[0][i] = true;
+        }
         for (int i = 1; i < s.size() + 1; i++)
         {
             for (int j = 1; j < t.size() + 1; j++)
             {
                 if (s[i - 1] == t[j - 1])
                 {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    dp[i][j] = dp[i - 1][j - 1];
                 }
                 else
                 {
@@ -44,7 +48,7 @@ public:
                 }
             }
         }
-        return dp.back().back() == s.size();
+        return dp.back().back();
     }
 };
 // @lc code=end

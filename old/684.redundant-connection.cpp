@@ -30,7 +30,6 @@ public:
     typedef struct Unionfind
     {
         vector<int> father;
-
         Unionfind(int n)
         {
             father.resize(n + 1);
@@ -38,10 +37,10 @@ public:
             {
                 father[i] = i;
             }
-        } /* data */
+        }
         int find(int a)
         {
-            if (a == father[a])
+            if (father[a] == a)
             {
                 return a;
             }
@@ -49,36 +48,34 @@ public:
         }
         bool issame(int a, int b)
         {
+
             return find(a) == find(b);
         }
         void join(int a, int b)
         {
             a = find(a);
             b = find(b);
-            if (a == b)
-            {
-                return;
-            }
-            else
+            if (a != b)
             {
                 father[a] = b;
             }
         }
-    };
+        /* data */
+    } Unionfind;
 
     vector<int> findRedundantConnection(vector<vector<int>> &edges)
     {
+        Unionfind uni(edges.size());
         vector<int> resu;
-        Unionfind un(edges.size());
         for (auto &i : edges)
         {
-            if (un.issame(i[0], i[1]))
+            if (uni.issame(i[0], i[1]))
             {
                 resu = i;
             }
             else
             {
-                un.join(i[0], i[1]);
+                uni.join(i[0], i[1]);
             }
         }
         return resu;

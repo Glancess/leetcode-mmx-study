@@ -29,55 +29,47 @@ class Solution
 public:
     int findTheCity(int n, vector<vector<int>> &edges, int distanceThreshold)
     {
-        // floyd
-        vector<vector<int>> dp(n + 1, vector<int>(n + 1, 1e9));
+        // floydsuanfa
+        vector<vector<int>> edge(n, vector<int>(n, 1e9));
         for (auto &i : edges)
         {
-            dp[i[0]][i[1]] = i[2];
-            dp[i[1]][i[0]] = i[2];
+            edge[i[0]][i[1]] = i[2];
+            edge[i[1]][i[0]] = i[2];
         }
-        for (int i = 0; i <= n; i++)
-        {
-            dp[i][i] = 0;
-        }
-
-        for (int k = 0; k <= n; k++)
-        {
-            for (int i = 0; i <= n; i++)
-            {
-                for (int j = 0; j <= n; j++)
-                {
-                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
-                }
-            }
-        }
-
-        int Minnindex = -1;
-        int allMinn = 1e9;
-
         for (int i = 0; i < n; i++)
         {
-            int count = 0;
-
-            for (int j = 0; j < n; j++)
+            edge[i][i] = 0;
+        }
+        for (int k = 0; k < n; k++)
+        {
+            for (int i = 0; i < n; i++)
             {
-                if (i == j)
-                    continue;
-
-                if (dp[i][j] <= distanceThreshold)
+                for (int j = 0; j < n; j++)
                 {
-                    count++;
+                    edge[i][j] = min(edge[i][j], edge[i][k] + edge[k][j]);
                 }
             }
+        }
+        int mincount = 1e9;
+        int minindex = -1;
+        for (int i = 0; i < n; i++)
+        {
 
-            if (count <= allMinn)
+            int ans = 0;
+            for (int &j : edge[i])
             {
-                allMinn = count;
-                Minnindex = i;
+                if (j <= distanceThreshold)
+                {
+                    ans++;
+                }
+            }
+            if (mincount >= ans)
+            {
+                mincount = ans;
+                minindex = i;
             }
         }
-
-        return Minnindex;
+        return minindex;
     }
 };
 // @lc code=end

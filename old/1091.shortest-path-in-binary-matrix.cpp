@@ -29,52 +29,59 @@ class Solution
 public:
     int shortestPathBinaryMatrix(vector<vector<int>> &grid)
     {
-        vector<vector<int>> dr = {{1, 0},
-                                  {-1, 0},
-                                  {0, 1},
-                                  {0, -1},
-                                  {1, 1},
-                                  {1, -1},
-                                  {-1, 1},
-                                  {-1, -1}};
+        vector<vector<int>> dr = {
+            {1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+
+        int n = grid.size();
+
         if (grid[0][0] == 1)
         {
             return -1;
         }
+
         queue<pair<int, int>> qu;
         qu.push({0, 0});
+
+        // 标记访问
         grid[0][0] = 1;
-        int result = 1;
+
+        int step = 1;
+
         while (!qu.empty())
         {
             int size = qu.size();
 
-            while (size > 0)
+            while (size--)
             {
-                size--;
-                auto [x, y] = qu.front();
+                auto t = qu.front();
                 qu.pop();
-                if (x == grid.size() - 1 && y == grid.size() - 1)
-                {
-                    return result;
-                }
-                for (auto i : dr)
-                {
-                    int nx = x + i[0];
-                    int ny = y + i[1];
 
-                    if (nx >= grid.size() || ny >= grid.size() || nx < 0 || ny < 0 || grid[nx][ny])
+                if (t.first == n - 1 && t.second == n - 1)
+                {
+                    return step;
+                }
+
+                for (auto &i : dr)
+                {
+                    int dx = t.first + i[0];
+                    int dy = t.second + i[1];
+
+                    if (dx < 0 || dy < 0 || dx >= n || dy >= n)
                     {
                         continue;
                     }
 
-                    grid[nx][ny] = 1;
-                    qu.push({nx, ny});
+                    if (grid[dx][dy] == 0)
+                    {
+                        grid[dx][dy] = 1;
+                        qu.push({dx, dy});
+                    }
                 }
-                /* code */
             }
-            result++;
+
+            step++;
         }
+
         return -1;
     }
 };

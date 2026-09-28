@@ -34,21 +34,21 @@ public:
         {
             sum += i;
         }
-        if (sum % 2)
+        if (sum % 2 == 1)
         {
             return false;
         }
         int total = sum / 2;
-        vector<bool> dp(total + 1, false);
+        vector<int> dp(total + 1, false);
         dp[0] = true;
-        for (int &i : nums)
+        for (auto &i : nums)
         {
             for (int j = total; j >= i; j--)
             {
-                dp[j] = dp[j - i] || dp[j];
+                dp[j] = dp[j] || dp[j - i];
             }
         }
-        return dp[total];
+        return dp.back();
     }
 };
 // @lc code=end

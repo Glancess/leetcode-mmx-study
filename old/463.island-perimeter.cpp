@@ -27,37 +27,36 @@ using namespace std;
 class Solution
 {
 public:
+    vector<pair<int, int>> dr = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     int islandPerimeter(vector<vector<int>> &grid)
     {
-        vector<pair<int, int>> dr = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        int result = 0;
-        int n = grid.size();
-        int m = grid[0].size();
-        for (int i = 0; i < n; i++)
+        int res = 0;
+
+        for (int i = 0; i < grid.size(); i++)
         {
-            for (int j = 0; j < m; j++)
+            for (int j = 0; j < grid[0].size(); j++)
             {
-                if (grid[i][j])
+                if (grid[i][j] == 1)
                 {
-                    int zhouzhang = 4;
+                    int t = 4;
                     for (auto &k : dr)
                     {
                         int nx = i + k.first;
                         int ny = j + k.second;
-                        if (nx >= n || ny >= m || nx < 0 || ny < 0)
+                        if (nx < 0 || ny < 0 || nx >= grid.size() || ny >= grid[0].size())
                         {
                             continue;
                         }
                         if (grid[nx][ny])
                         {
-                            zhouzhang--;
+                            t--;
                         }
                     }
-                    result += zhouzhang;
+                    res += t;
                 }
             }
         }
-        return result;
+        return res;
     }
 };
 // @lc code=end
